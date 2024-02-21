@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define SIMONS_CODE
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
@@ -9,9 +11,12 @@ namespace CarRace
     public class Garage
     {
 
-    // ################################################################
-    // Fields
-        
+        // ################################################################
+        // Fields
+
+        // SIMON - 2024-02021
+        // Define public properties with Pascal casing
+        //public List<Car> CarsInTheGarage;
         public List<Car> carsInTheGarage;
 
     // ################################################################
@@ -38,7 +43,17 @@ namespace CarRace
             Console.WriteLine("The following cars are in the garage:");
             for (int i = 0, a = 1; i < _theGarage.carsInTheGarage.Count; i++, a++)
             {
+
+#if SIMONS_CODE
+                var car = _theGarage.carsInTheGarage[i];
+                Console.WriteLine($"Car #{a} = {car.Make}, {car.Model}, {car.Colour}, {car.Year}");
+#else
                 Console.WriteLine($"Car #{a} = {carsInTheGarage[i].Make}, {carsInTheGarage[i].Model}, {carsInTheGarage[i].Colour}, {carsInTheGarage[i].Year}");
+#endif
+
+
+
+
             }
 
             Console.WriteLine();
@@ -84,10 +99,30 @@ namespace CarRace
 
                 Console.WriteLine();
 
+#if SIMONS_CODE
+
+                var car = _theGarage.carsInTheGarage.ElementAt(carNumberToEdit);
+                
+                if(car is not null)
+                {
+                    car.Make = make;
+                    car.Model = model;
+                    car.Colour = colour;
+                    car.Year = year;
+                }
+
+
+#else
                 _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Make = make;
                 _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Model = model;
                 _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Colour = colour;
                 _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Year = year;
+#endif
+
+
+
+
+
 
             }
 

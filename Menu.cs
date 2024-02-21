@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+#define SIMONS_CODE
+
+using System;
 using System.Collections.Generic;
 
 
@@ -38,10 +41,46 @@ namespace CarRace
             return choice;
         }
 
-        public static void RunChosenOption(int _choice, Garage _theGarage)
+        public static void RunChosenOption(int _choice, Garage theGarage)
         {
             int userChoice;
 
+#if SIMONS_CODE
+
+            switch (_choice)
+            {
+                // Create_Cars_And_Add_To_Garage
+                case 1:
+                    List<Car> listOfNewCars = Car.CreateCars();
+                    theGarage.AddCarsToTheGarage(listOfNewCars);
+                    break;
+
+                // Show_Cars_In_Garage
+                case 2:
+                    theGarage.ShowCarsInTheGarage(theGarage);
+                    break;
+
+                // Remove_Cars_From_Garage
+                case 3:
+                    theGarage.RemoveCarsFromGarage(theGarage);
+                    break;
+
+                // Edit_Car_Details
+                case 4:
+                    // which car # do you want to edit?
+                    Console.WriteLine("which car would you like to edit?");
+                    int carNumberToEdit = Convert.ToInt32(Console.ReadLine()) -1;
+
+                    // edit the details of the chosen car
+                    theGarage.EditCar(theGarage, carNumberToEdit);
+                    
+                    
+                    break;
+            }
+
+            Program.Main([""]);
+
+#else
             switch (_choice)
             {
                 // Create_Cars_And_Add_To_Garage
@@ -75,6 +114,11 @@ namespace CarRace
                     Program.Main(_theGarage);
                     break;
             }
+
+#endif
         }
+
     }
+
+
 }
