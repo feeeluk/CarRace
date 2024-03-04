@@ -27,48 +27,40 @@ namespace CarRace
 
                 switch (UserInput)
                 {
-                    // Create_Cars (and then add to the default garage)
+                    // Create Cars (and then add to the default garage)
                     case 1:
                         List<Car> listOfNewCars = Car.CreateCars();
                         theGarage.AddCarsToTheGarage(listOfNewCars);
                         break;
 
-                    // Show_Cars_In_Garage
+                    // Show Cars In Garage
                     case 2:
                         theGarage.ShowCarsInTheGarage(theGarage);
 
                         break;
 
-                    // Remove_Cars_From_Garage
+                    // Remove Cars From Garage
                     case 3:
                         theGarage.RemoveCarsFromGarage(theGarage);
 
                         break;
 
-                    // Edit_Car_Details
+                    // Edit Car Details
                     case 4:
-                        // which car # do you want to edit?
-                        Console.WriteLine("#################################");
-                        Console.WriteLine("which car would you like to edit?");
-                        int carNumberToEdit = Convert.ToInt32(Console.ReadLine());
 
                         // edit the details of the chosen car
-                        theGarage.EditCar(theGarage, carNumberToEdit);
+                        Car.EditCar(theGarage);
                         break;
                 }
             }
             
             while (UserInput != 5);
         }
-        
+
+
         public static void ShowMenu()
         {
             Console.WriteLine(" *** MENU ***");
-
-            //for (int i =0, a=1; i < Enum.GetValues(typeof(MenuOptions)).Length; i++, a++)
-            //{
-            //    Console.WriteLine($"{a} - {Enum.GetName(typeof(MenuOptions), i)}");
-            //}
 
             int item = 1;
             int enumItem = 0;
@@ -77,7 +69,6 @@ namespace CarRace
             {
                 String rawMenuItem = Enum.GetName(typeof(MenuOptions), enumItem);
                 String menuItem = rawMenuItem.Replace('_', ' ');
-
 
                 Console.WriteLine($"{item} - {menuItem}");
                 item++;
@@ -97,5 +88,7 @@ namespace CarRace
 
             return choice;
         }
+
+
     }
 }
