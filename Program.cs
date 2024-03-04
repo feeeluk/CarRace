@@ -1,33 +1,21 @@
 ﻿namespace CarRace
 {
-    internal class Program
+    internal static class Program
     {     
         public static void Main(string[] args)
         {
-            Garage theGarage = new Garage();
+            // Initialise the Menu object (there should only be 1)
+            Menu programMenu = new Menu();           
             
-            // Provide user with a menu of actions
-            Menu.ShowMenu();
+            // Initialize the Garage object (there should only be 1 for now, but will add more in the future)
+            Garage theGarage = new Garage("Phil's");
 
-            // Get user's choice of action to perform
-            int userChoice = Menu.ChooseMenuOption();
+            // Insert some sample cars into the Garage object
+            theGarage.carsInTheGarage.Add(new Car("Ford","Focus","Black","2013"));
 
-            // Perform the requested action
-            Menu.RunChosenOption(userChoice, theGarage);      
-        }
-
-        public static void Main(Garage _theGarage)
-        {
-            Garage theGarage = new Garage();
-
-            // Provide user with a menu of actions
-            Menu.ShowMenu();
-
-            // Get user's choice of action to perform
-            int userChoice = Menu.ChooseMenuOption();
-
-            // Perform the requested action
-            Menu.RunChosenOption(userChoice, _theGarage);
+            // Provide user with menu
+            programMenu.ProvideUserWithMenu(theGarage);
+                  
         }
     }
 }

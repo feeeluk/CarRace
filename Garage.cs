@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
-
+using System.Reflection.Metadata.Ecma335;
 
 namespace CarRace
 {
@@ -10,91 +8,133 @@ namespace CarRace
     {
 
     // ################################################################
-    // Fields
-        
-        public List<Car> carsInTheGarage;
-
-    // ################################################################
     // Constructor
-        
-        public Garage()
+
+        public Garage(String name)
         {
+            Name = name;
             carsInTheGarage = new List<Car>();
         }
 
     // ################################################################
+    // Fields
+
+        public List<Car> carsInTheGarage;
+
+    // ################################################################
+    // Properties
+
+        String Name { get; set; }
+    
+    // ################################################################
     // Methods        
-        
-        public void AddCarsToTheGarage(List<Car> _newCar)
+
+        public void AddCarsToTheGarage(List<Car> newCar)
         {
-            foreach (Car car in _newCar)
+            foreach (Car car in newCar)
             {
                 carsInTheGarage.Add(car);
             }                
         }
 
-        public void ShowCarsInTheGarage(Garage _theGarage)
+        public void ShowCarsInTheGarage(Garage theGarage)
         {
-            Console.WriteLine("The following cars are in the garage:");
-            for (int i = 0, a = 1; i < _theGarage.carsInTheGarage.Count; i++, a++)
+            if (theGarage.carsInTheGarage.Count > 0)
             {
-                Console.WriteLine($"Car #{a} = {carsInTheGarage[i].Make}, {carsInTheGarage[i].Model}, {carsInTheGarage[i].Colour}, {carsInTheGarage[i].Year}");
+                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                Console.WriteLine($"The following cars are in {theGarage.Name} garage:");
+                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            
+                for (int i = 0, a = 1; i < theGarage.carsInTheGarage.Count; i++, a++)
+                {
+                    Console.WriteLine($"\t#{a} = {carsInTheGarage[i].Make}, {carsInTheGarage[i].Model}, {carsInTheGarage[i].Colour}, {carsInTheGarage[i].Year}");
+                }
+                Console.WriteLine("\t= = = = = = = = = = = = = = =");
+                Console.WriteLine();
             }
 
-            Console.WriteLine();
-        }
-
-        public void RemoveCarsFromGarage(Garage _theGarage)
-        {
-            _theGarage.carsInTheGarage.Clear();
-        }
-        public void EditCar(Garage _theGarage, int carNumberToEdit)
-        {
-            Console.WriteLine();
-            Console.Write($"{_theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Make}, ");
-            Console.Write($"{_theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Model}, ");
-            Console.Write($"{_theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Colour}, ");
-            Console.Write($"{_theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Year}");
-            Console.WriteLine();
-
-            Console.WriteLine("Is this the car you would like to edit? (Y/N)");
-
-            String response = Console.ReadLine();
-
-            if (response == "y" )
+            else 
             {
-                String make;
-                String model;
-                String colour;
-                String year;
-
+                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                Console.WriteLine("\tThere are no cars in the garage");
+                Console.WriteLine("\t= = = = = = = = = = = = = = =");
                 Console.WriteLine();
-                
-                Console.Write($"edit Make: ");
-                make = Console.ReadLine();
+            }
+            
+        }
 
-                Console.Write($"edit Model: ");
-                model = Console.ReadLine();
+        public void RemoveCarsFromGarage(Garage theGarage)
+        {
+            theGarage.carsInTheGarage.Clear();
+        }
 
-                Console.Write($"edit Colour: ");
-                colour = Console.ReadLine();
-
-                Console.Write($"edit Year: ");
-                year = Console.ReadLine();
-
+        public void EditCar(Garage theGarage, int carNumberToEdit)
+        {
+            
+            if(carNumberToEdit > theGarage.carsInTheGarage.Count || carNumberToEdit < theGarage.carsInTheGarage.Count)
+            {
+                // selected car is not in the garage
                 Console.WriteLine();
-
-                _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Make = make;
-                _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Model = model;
-                _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Colour = colour;
-                _theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Year = year;
-
+                Console.WriteLine("?????????????????????????????????????");
+                Console.WriteLine("*** This car is not in the garage ***");
+                Console.WriteLine();
             }
 
             else
             {
+                carNumberToEdit--;
+                Console.WriteLine();
+                Console.Write($"{theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Make}, ");
+                Console.Write($"{theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Model}, ");
+                Console.Write($"{theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Colour}, ");
+                Console.Write($"{theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Year}");
+                Console.WriteLine();
 
-            }
+                Console.WriteLine("#############################################");
+                Console.WriteLine("Is this the car you would like to edit? (Y/N)");
+
+                String response = Console.ReadLine();
+
+                if (response == "y" || response=="Y")
+                {
+                    String make;
+                    String model;
+                    String colour;
+                    String year;
+
+                    Console.WriteLine();
+
+                    Console.Write($"edit Make: ");
+                    make = Console.ReadLine();
+
+                    Console.Write($"edit Model: ");
+                    model = Console.ReadLine();
+
+                    Console.Write($"edit Colour: ");
+                    colour = Console.ReadLine();
+
+                    Console.Write($"edit Year: ");
+                    year = Console.ReadLine();
+
+                    Console.WriteLine();
+
+                    theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Make = make;
+                    theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Model = model;
+                    theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Colour = colour;
+                    theGarage.carsInTheGarage.ElementAt(carNumberToEdit).Year = year;
+
+                }
+
+                else if (response == "n" || response == "N")
+                {
+
+                }
+
+                else
+                {
+                    Console.WriteLine("Please enter Y or N?");
+                }
+            }          
         }
     }
 }

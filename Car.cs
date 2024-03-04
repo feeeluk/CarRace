@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
 
 namespace CarRace
 {
     public class Car
     {
+
+    // ################################################################
+    // Constructor
+
+        public Car(String make, String model, String colour, String year)
+        {
+            Make = make;
+            Model = model;
+            Colour = colour;
+            Year = year;
+        }
 
     // ################################################################
     // Fields
@@ -24,18 +33,6 @@ namespace CarRace
         public String Colour { get { return colour; } set { colour = value; } }
         public String Year { get { return year; } set { year = value; } }
 
-
-    // ################################################################
-    // Constructor
-
-        public Car(String _make, String _model, String _colour, String _year)
-        {
-            Make = _make;
-            Model = _model;
-            Colour = _colour;
-            Year = _year;
-        }
-
     // ################################################################
     // Methods
 
@@ -46,7 +43,7 @@ namespace CarRace
             Console.WriteLine("How many cars would you like to add?");
             int numberOfCars = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 1; i < numberOfCars+1; i++)
+            for (int i = 1; i <= numberOfCars; i++)
             {
                 Car newCar = Car.CreateIndividualCar(i);
                 listOfNewCars.Add(newCar);
@@ -57,10 +54,10 @@ namespace CarRace
             return listOfNewCars;
         }
 
-        public static Car CreateIndividualCar(int _i)
+        public static Car CreateIndividualCar(int i)
         {
             Car newCar;
-            int carNumber = _i;
+            int carNumber = i;
             String make;
             String model;
             String colour;
