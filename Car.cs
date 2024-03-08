@@ -16,15 +16,14 @@ namespace CarRace
             Model = model;
             Colour = colour;
             Year = year;
+            NumberOfCars++;
+            cars.Add(this);
         }
 
     // ################################################################
     // Fields
-
-        private String make;
-        private String model;
-        private String colour;
-        private String year;
+        public static List<Car> cars = new List<Car>();
+        
 
     // ################################################################
     // Properties
@@ -34,8 +33,10 @@ namespace CarRace
         public String Colour { get; private set; }
         public String Year { get; private set; }
 
+        public static int NumberOfCars { get; private set; }
+
     // ################################################################
-    // Methods
+    // Static Methods
 
         public static List<Car> CreateCars()
         {
@@ -189,6 +190,34 @@ namespace CarRace
             {
                 return true;
             }
-        }            
-}
+        }
+
+        public static void ShowAllCars()
+        {
+            int number = 1;
+
+            Console.WriteLine($"The cars are:");
+
+            foreach (Car car in cars)
+            {
+                Console.WriteLine($"Car {number} - {car.Make}, {car.Model}, {car.Colour}, {car.Year}");
+                number++;
+            }
+
+            Console.WriteLine();
+        }
+
+        public static void HowManyCars()
+        {
+            Console.WriteLine($"Cars = {NumberOfCars}");
+        }
+
+        public static Car WhichCarToAdd()
+        {
+            Console.WriteLine($"Which car would you like to add to a team?");
+            int userInput = Convert.ToInt32(Console.ReadLine())-1;
+            Console.WriteLine();
+            return cars.ElementAt(userInput);
+        }
+    }
 }

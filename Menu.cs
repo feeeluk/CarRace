@@ -3,58 +3,78 @@ using System.Collections.Generic;
 
 namespace CarRace
 {
-    public class Menu
+    public static class Menu
     {
 
-    // Constructor
-        public Menu()
-        {
-
-        }
-
-    // Fields
-
-    // Properties
-        private int UserInput { get; set; }
-
     // Methods
-        public void ProvideUserWithMenu(Garage theGarage)
+        public static void ProvideUserWithMenu()
         {
+            int userInput;
+
             do
             {
                 Menu.ShowMenu();
-                UserInput = Menu.ChooseMenuOption();
+                userInput = Menu.ChooseMenuOption();
 
-                switch (UserInput)
+                switch (userInput)
                 {
-                    // Create Cars (and then add to the default garage)
+                    // Create Car
                     case 1:
                         List<Car> listOfNewCars = Car.CreateCars();
-                        theGarage.AddCarsToTheGarage(listOfNewCars);
                         break;
 
-                    // Show Cars In Garage
+                    // Create new team
                     case 2:
-                        theGarage.ShowCarsInTheGarage(theGarage);
-
+                        String teamName = Team.GetTeamName();
+                        Team.CreateTeam(teamName);
                         break;
 
-                    // Remove Cars From Garage
+                    // Show All Cars
                     case 3:
-                        theGarage.RemoveCarsFromGarage(theGarage);
-
+                        Car.ShowAllCars();
                         break;
+
+                    // Show all teams
+                    case 4:
+                        Team.ShowAllTeams();
+                        break;
+
+                    // Add car to team
+                    case 5:
+                        Car whichCar = Car.WhichCarToAdd();
+                        Team whichTeam = Team.WhichTeam();
+                        whichTeam.AddCarToTeam(whichCar);
+                        break;
+
+                    // Show cars in team
+                    case 6:
+                        Team showWhichTeam = Team.ShowWhichTeam();
+                        showWhichTeam.ShowCarsInTeam();
+                        break;
+
+                    // Clear Car/s From Team
+                    case 7:
+                    Team clearWhichTeam = Team.ClearWhichTeam();
+                    clearWhichTeam.ClearCars();
+                    break;
 
                     // Edit Car Details
-                    case 4:
+                    //case 8:
+                        // which car to edit or exit
+                            // is this the right car (y/n)
+                                // edit details
 
-                        // edit the details of the chosen car
-                        Car.EditCar(theGarage);
+                    // Statistics
+                    case 9:
+                        Team.HowManyTeams();
+                        Car.HowManyCars();
+                        Console.WriteLine();
                         break;
+
                 }
             }
             
-            while (UserInput != 5);
+            while (userInput != 10);
         }
 
 
@@ -88,7 +108,5 @@ namespace CarRace
 
             return choice;
         }
-
-
     }
 }
