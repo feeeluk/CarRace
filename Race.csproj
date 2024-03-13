@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Circuits\" />
+    <Folder Include="Menu\" />
+    <Folder Include="Teams\" />
+    <Folder Include="Vehicles\" />
+  </ItemGroup>
+
 </Project>

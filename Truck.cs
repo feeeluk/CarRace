@@ -3,35 +3,38 @@ using System.Collections.Generic;
 
 namespace Race
 {
-    public class Team
+    public class Truck : Vehicle
     {
         // ****************************************************************
         // Fields
         // ****************************************************************
-        public static List<Team> teams = new List<Team>();
-        public List<Vehicle> vehiclesInTeam = new List<Vehicle>();
 
 
         // ****************************************************************
         // Properties
-        // ****************************************************************
-        public string Name { get; set; }
-        public static int NumberOfTeams { get; private set; }
+        // ****************************************************************  
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Team(string name)
+        public Truck(int id, string make, string model, string colour, string year, string type, int numberOfWheels, int speed, string speedCategory) : base(id, make, model, colour, year, type, numberOfWheels, speed, speedCategory)
         {
-            Name = name;
-            NumberOfTeams++;
-            teams.Add(this);
+            ID = id;
+            Make = make;
+            Model = model;
+            Colour = colour;
+            Year = year;
+            Type = type;
+            NumberOfWheels = numberOfWheels;
+            Speed = speed;
+            SpeedCategory = speedCategory;
         }
 
 
         // ****************************************************************
         // Methods
         // ****************************************************************
+
     }
 }

@@ -1,32 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Race
 {
-    public class Team
+    public class Circuit
     {
         // ****************************************************************
         // Fields
         // ****************************************************************
-        public static List<Team> teams = new List<Team>();
-        public List<Vehicle> vehiclesInTeam = new List<Vehicle>();
+        public static List<Circuit> circuits = new List<Circuit>();
+        private int _id; 
 
 
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public string Name { get; set; }
-        public static int NumberOfTeams { get; private set; }
+        public string Name { get; private set; }
+        public int NumberOfLaps { get; private set; }
+        public double LapLengthKm { get; private set; }
+        public static int NumberOfCircuits { get; private set; }
+        public int ID
+        {
+            get { return _id; }
+            set
+            {
+                _id = NumberOfCircuits;
+            }
+        }
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Team(string name)
+        public Circuit(int id, string name, int laps, double lapLength)
         {
+            NumberOfCircuits++; 
+            ID = id;
             Name = name;
-            NumberOfTeams++;
-            teams.Add(this);
+            NumberOfLaps = laps;
+            circuits.Add(this);
+            LapLengthKm = lapLength;
         }
 
 

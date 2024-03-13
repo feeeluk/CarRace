@@ -1,0 +1,5 @@
+{
+  "Race Control": [ "Start race", "Stop race", "Pause race" ],
+  "Race Admin": [ "Add team", "Remove team", "Edit team", "Add circuit", "Remove circuit", "Edit circuit", "Show results" ],
+  "Team Admin": [ "Add vehicle", "Edit vehicle", "Remove vehicle", "Edit team" ]
+}
