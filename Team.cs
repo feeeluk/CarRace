@@ -7,26 +7,37 @@ namespace Race
     {
         // ****************************************************************
         // Fields
-        // ****************************************************************
-        public static List<Team> teams = new List<Team>();
-        public List<Vehicle> vehiclesInTeam = new List<Vehicle>();
+        // ****************************************************************        
+        private int _id;
 
 
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public string Name { get; set; }
-        public static int NumberOfTeams { get; private set; }
+        public static int NumberOfTeams { get; private set; } = 1;
+        public static List<Team> Teams { get; private set; } = new List<Team>();
 
+        public int ID
+        {
+            get { return _id; }
+            private set
+            {
+                _id = NumberOfTeams;
+            }
+        }
+        public List<Vehicle> VehiclesInTeam { get; private set; } = new List<Vehicle>();
+        public string Name { get; private set; }
+        
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Team(string name)
+        public Team(int id, string name)
         {
+            ID = id;
             Name = name;
             NumberOfTeams++;
-            teams.Add(this);
+            Teams.Add(this);
         }
 
 

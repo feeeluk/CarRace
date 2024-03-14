@@ -9,17 +9,15 @@ namespace Race
         // ****************************************************************
         // Fields
         // ****************************************************************
-        public static List<Circuit> circuits = new List<Circuit>();
-        private int _id; 
+        private int _id;
 
 
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public string Name { get; private set; }
-        public int NumberOfLaps { get; private set; }
-        public double LapLengthKm { get; private set; }
-        public static int NumberOfCircuits { get; private set; }
+        public static List<Circuit> Circuits { get; private set; }  = new List<Circuit>();
+        public static int NumberOfCircuits { get; private set; } = 1;
+        
         public int ID
         {
             get { return _id; }
@@ -28,6 +26,11 @@ namespace Race
                 _id = NumberOfCircuits;
             }
         }
+        public string Name { get; private set; }
+        public int NumberOfLaps { get; private set; }
+        public double LapLengthKm { get; private set; }
+        
+
 
 
         // ****************************************************************
@@ -35,12 +38,13 @@ namespace Race
         // ****************************************************************
         public Circuit(int id, string name, int laps, double lapLength)
         {
-            NumberOfCircuits++; 
             ID = id;
             Name = name;
             NumberOfLaps = laps;
-            circuits.Add(this);
+            Circuits.Add(this);
             LapLengthKm = lapLength;
+
+            NumberOfCircuits++;
         }
 
 

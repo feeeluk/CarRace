@@ -18,17 +18,8 @@ namespace Race
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Bike(int id, string make, string model, string colour, string year, string type, int numberOfWheels, int speed, string speedCategory) : base(id, make, model, colour, year, type, numberOfWheels, speed, speedCategory)
+        public Bike(int id, string make, string model, string colour, string year, string type, int numberOfWheels, int speed, string speedCategory, bool vehicleStart) : base(id, make, model, colour, year, type, numberOfWheels, speed, speedCategory, vehicleStart)
         {
-            ID = id;
-            Make = make;
-            Model = model;
-            Colour = colour;
-            Year = year;
-            Type = type;
-            NumberOfWheels = numberOfWheels;
-            Speed = speed;
-            SpeedCategory = speedCategory;
         }
 
 

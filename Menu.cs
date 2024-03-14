@@ -26,7 +26,12 @@ namespace Race
                     Console.WriteLine($"{menuItem}");
                 }
 
-                else
+                else if (menuItem.StartsWith("IGNORE") == true)
+                    {
+
+                    }
+
+                    else
                 {
                     menuItem = menuItem.Replace('_', ' ');
                     Console.WriteLine($"  {item} - {menuItem}");
