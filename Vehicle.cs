@@ -112,14 +112,14 @@ namespace Race
         public virtual void Start()
         {
             VehicleStart = true;
-            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has started moving. VehicleStart={VehicleStart}");
+            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has started moving");
         }
 
 
         public virtual void Stop()
         {
             VehicleStart = false;
-            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has stopped moving. VehicleStart={VehicleStart}");
+            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has stopped moving");
         }
 
 

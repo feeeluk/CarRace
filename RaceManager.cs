@@ -7,14 +7,9 @@ namespace Race
     public class RaceManager
     {
         // ****************************************************************
-        // Fields
-        // ****************************************************************       
-        public Menu menu { get; set; }
-
-
-        // ****************************************************************
         // Properties
         // ****************************************************************
+        public Menu Menu { get; set; }
 
 
         // ****************************************************************
@@ -56,7 +51,11 @@ namespace Race
             Team team10 = new Team(0, "Haas");
 
 
-            // Add some vehicles to a team
+            // Add vehicles to teams
+            team1.VehiclesInTeam.Add(vehicle1);
+            Vehicle.UnassignedVehicles.Remove(vehicle1);
+            team1.VehiclesInTeam.Add(vehicle2);
+            Vehicle.UnassignedVehicles.Remove(vehicle2);
             team2.VehiclesInTeam.Add(vehicle3);
             Vehicle.UnassignedVehicles.Remove(vehicle3);
             team2.VehiclesInTeam.Add(vehicle5);
@@ -255,7 +254,7 @@ namespace Race
             while (x == 0)
             {
                 Circuit circuit = AskUserToChooseCircuit();
-                String answer = IsThisCorrect();
+                String answer = ConfirmChoiceOfCircuit();
 
                 switch (answer)
                 {
@@ -290,19 +289,19 @@ namespace Race
 
         Circuit AskUserToChooseCircuit()
         {
-            int userChoice = GetChoiceFromUser();
-            return DisplayChoice(userChoice);
+            int userChoice = GetChoiceOfCircuit();
+            return DisplayChoiceOfCircuit(userChoice);
         }
 
 
-                int GetChoiceFromUser()
+                int GetChoiceOfCircuit()
                 {
                     Console.WriteLine($"Which circuit do you want to choose?");
                     return Convert.ToInt32(Console.ReadLine()) - 1;
                 }
 
 
-                Circuit DisplayChoice(int userChoice)
+                Circuit DisplayChoiceOfCircuit(int userChoice)
                 {
                     Console.WriteLine();
                     Circuit choice = Circuit.Circuits.ElementAt(userChoice);
@@ -312,7 +311,7 @@ namespace Race
                 }
 
 
-        String IsThisCorrect()
+        String ConfirmChoiceOfCircuit()
         {
             Console.WriteLine($"Is this correct?");
             Console.WriteLine($"y(yes) n(no) x(exit)");
@@ -325,12 +324,17 @@ namespace Race
             Console.WriteLine($"The {circuit.Name} Grand Prix has started!");
             Console.WriteLine($"=========================================");
             Console.WriteLine();
+            Thread.Sleep(1000);
 
             Console.WriteLine($"Circuit details: Number of laps:{circuit.NumberOfLaps}, Distance per lap: {circuit.LapLengthKm}km, total distance {circuit.NumberOfLaps * circuit.LapLengthKm}km");
             Console.WriteLine();
+            Thread.Sleep(1000);
 
             StartAllVehicles();
+            Thread.Sleep(1000);
+
             ShowEachLap(circuit);
+            Thread.Sleep(1000);
         }
 
 
@@ -368,9 +372,13 @@ namespace Race
         {
             Console.WriteLine($"  The race is ending...");
             Console.WriteLine();
+            Thread.Sleep(1000);
 
             StopAllVehicles();
+            Thread.Sleep(1000);
+
             Results(circuit);
+            Thread.Sleep(1000);
 
             Console.WriteLine($"The Grand Prix has ended!");
             Console.WriteLine($"=========================");
@@ -381,8 +389,10 @@ namespace Race
                 public void Results(Circuit circuit)
                 {
                     Console.WriteLine($"  Results / timings:");
-                    List<String> results = new List<String>();
+
                     List<Vehicle> allVehicles = new List<Vehicle>();
+                    List<RaceResult> raceResult = new List<RaceResult>();
+
                     foreach (Team team in Team.Teams)
                     {
                         foreach (Vehicle vehicle in team.VehiclesInTeam)
@@ -393,11 +403,43 @@ namespace Race
 
                     foreach (Vehicle vehicle in allVehicles)
                     {
-                        double time = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / vehicle.Speed, 2);
-                        Console.WriteLine($"   - {time}hrs/mins - Vehicle #{vehicle.ID}, ({vehicle.Type}), {vehicle.Make} {vehicle.Model}");
+                        int resultVehicleID = vehicle.ID;
+                        int resultCircuitID = circuit.ID;
+                        double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / vehicle.Speed, 2);
+                        String resultVehicleType = vehicle.Type;
+                        String resultVehicleMake = vehicle.Make;
+                        String resultVehicleModel = vehicle.Model;
+                        RaceResult resultRecord = new RaceResult(resultVehicleID, resultCircuitID, resultTime, 0, resultVehicleType, resultVehicleMake, resultVehicleModel);
+                        raceResult.Add(resultRecord);
                     }
 
-                    //var resultsOrderedBy = results.OrderByDescending(x => x.Speed).ToList();
+                    var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
+
+                    for (int i = 0; i < resultsOrderedBy.Count; i++)
+                    {
+                        String podium;
+
+                        switch (i)
+                        {
+                            case 0:
+                                podium = "** WINNER **";
+                                break;
+
+                            case 1:
+                                podium = "** PODIUM **";
+                                break;
+
+                            case 2:
+                                podium = "** PODIUM **";
+                                break;
+
+                            default:
+                                podium = "";
+                                break;
+                        }
+                
+                        Console.WriteLine($"   - #{i+1} {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel} {podium}");
+                    }
 
                     Console.WriteLine();
                 }
