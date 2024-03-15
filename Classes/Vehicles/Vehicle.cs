@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Race
+namespace Race.Classes.Vehicles
 {
     public abstract class Vehicle
     {
@@ -11,7 +11,7 @@ namespace Race
         private string _type;
         private string _speedCategory;
         private int _id;
-        
+
 
         // ****************************************************************
         // Properties
@@ -88,7 +88,7 @@ namespace Race
         // Constructor
         // ****************************************************************
         public Vehicle(int id, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart)
-        {    
+        {
             ID = id;
             Make = make;
             Model = model;
@@ -99,7 +99,7 @@ namespace Race
             Speed = speed;
             SpeedCategory = speedCategory;
             VehicleStart = vehicleStart;
-        
+
             NumberOfVehicles++;
             AllVehicles.Add(this);
             UnassignedVehicles.Add(this);

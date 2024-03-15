@@ -27,11 +27,11 @@ namespace Race
                 }
 
                 else if (menuItem.StartsWith("IGNORE") == true)
-                    {
+                {
 
-                    }
+                }
 
-                    else
+                else
                 {
                     menuItem = menuItem.Replace('_', ' ');
                     Console.WriteLine($"  {item} - {menuItem}");

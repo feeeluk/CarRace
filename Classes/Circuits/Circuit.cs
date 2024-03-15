@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace Race
+namespace Race.Classes.Circuits
 {
     public class Circuit
     {
@@ -15,9 +15,9 @@ namespace Race
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public static List<Circuit> Circuits { get; private set; }  = new List<Circuit>();
+        public static List<Circuit> Circuits { get; private set; } = new List<Circuit>();
         public static int NumberOfCircuits { get; private set; } = 1;
-        
+
         public int ID
         {
             get { return _id; }
@@ -29,7 +29,7 @@ namespace Race
         public string Name { get; private set; }
         public int NumberOfLaps { get; private set; }
         public double LapLengthKm { get; private set; }
-        
+
 
 
 

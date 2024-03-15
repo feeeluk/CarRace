@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Race.Classes.Circuits;
+using Race.Classes.Results;
+using Race.Classes.Teams;
+using Race.Classes.Vehicles;
 
 namespace Race
 {
@@ -401,44 +405,79 @@ namespace Race
                         }
                     }
 
-                    foreach (Vehicle vehicle in allVehicles)
+                    foreach (Vehicle raceVehicle in allVehicles)
                     {
-                        int resultVehicleID = vehicle.ID;
-                        int resultCircuitID = circuit.ID;
-                        double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / vehicle.Speed, 2);
-                        String resultVehicleType = vehicle.Type;
-                        String resultVehicleMake = vehicle.Make;
-                        String resultVehicleModel = vehicle.Model;
-                        RaceResult resultRecord = new RaceResult(resultVehicleID, resultCircuitID, resultTime, 0, resultVehicleType, resultVehicleMake, resultVehicleModel);
+                        int resultVehicleID = raceVehicle.ID;
+                        String resultVehicleType = raceVehicle.Type;
+                        String resultVehicleMake = raceVehicle.Make;
+                        String resultVehicleModel = raceVehicle.Model;
+                        String resultCircuitName = circuit.Name;
+                        String resultTeamName = "?";
+                        double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / raceVehicle.Speed, 2);
+                        int resultPosition = 0;
+                        int resultPoints = 0;
+
+                        RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamName, resultTime, resultPosition, resultPoints);
                         raceResult.Add(resultRecord);
                     }
 
                     var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
 
-                    for (int i = 0; i < resultsOrderedBy.Count; i++)
+                    for (int i = 0, x = 1; i < resultsOrderedBy.Count; i++, x++)
                     {
-                        String podium;
+                        String podium = "            ";
+                        int p = resultsOrderedBy.ElementAt(i).Points;
 
-                        switch (i)
+                        switch (x)
                         {
-                            case 0:
-                                podium = "** WINNER **";
-                                break;
-
                             case 1:
-                                podium = "** PODIUM **";
+                                podium = "** WINNER **";
+                                p = 25;
                                 break;
 
                             case 2:
                                 podium = "** PODIUM **";
+                                p = 18;
+                                break;
+
+                            case 3:
+                                podium = "** PODIUM **";
+                                p = 15;
+                                break;
+
+                            case 4:
+                                p = 12;
+                                break;
+
+                            case 5:
+                                p = 10;
+                                break;
+
+                            case 6:
+                                p = 8;
+                                break;
+
+                            case 7:
+                                p = 6;
+                                break;
+
+                            case 8:
+                                p = 4;
+                                break;
+
+                            case 9:
+                                p = 2;
+                                break;
+
+                            case 10:
+                                p = 1;
                                 break;
 
                             default:
-                                podium = "";
                                 break;
                         }
-                
-                        Console.WriteLine($"   - #{i+1} {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel} {podium}");
+
+                        Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team{resultsOrderedBy.ElementAt(i).TeamName} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
                     }
 
                     Console.WriteLine();

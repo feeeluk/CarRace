@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Race.Classes.Vehicles;
 
-namespace Race
+namespace Race.Classes.Teams
 {
     public class Team
     {
@@ -27,7 +28,7 @@ namespace Race
         }
         public List<Vehicle> VehiclesInTeam { get; private set; } = new List<Vehicle>();
         public string Name { get; private set; }
-        
+
 
         // ****************************************************************
         // Constructor

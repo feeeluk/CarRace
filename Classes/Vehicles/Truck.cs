@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Race
+namespace Race.Classes.Vehicles
 {
     public class Truck : Vehicle
     {
