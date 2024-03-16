@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Race.Classes.Circuits;
 using Race.Classes.Results;
@@ -325,12 +326,12 @@ namespace Race
 
         public void StartRace(Circuit circuit)
         {
-            Console.WriteLine($"The {circuit.Name} Grand Prix has started!");
-            Console.WriteLine($"=========================================");
+            Console.WriteLine($"  The {circuit.Name} Grand Prix has started!");
+            Console.WriteLine($"  =========================================");
             Console.WriteLine();
             Thread.Sleep(1000);
 
-            Console.WriteLine($"Circuit details: Number of laps:{circuit.NumberOfLaps}, Distance per lap: {circuit.LapLengthKm}km, total distance {circuit.NumberOfLaps * circuit.LapLengthKm}km");
+            Console.WriteLine($"  Circuit details: Number of laps:{circuit.NumberOfLaps}, Distance per lap: {circuit.LapLengthKm}km, total distance {circuit.NumberOfLaps * circuit.LapLengthKm}km");
             Console.WriteLine();
             Thread.Sleep(1000);
 
@@ -384,122 +385,118 @@ namespace Race
             Results(circuit);
             Thread.Sleep(1000);
 
-            Console.WriteLine($"The Grand Prix has ended!");
-            Console.WriteLine($"=========================");
+            Console.WriteLine($"  The Grand Prix has ended!");
+            Console.WriteLine($"  =========================");
             Console.WriteLine();
         }
 
 
-                public void Results(Circuit circuit)
+                public void StopAllVehicles()
                 {
-                    Console.WriteLine($"  Results / timings:");
-
-                    List<Vehicle> allVehicles = new List<Vehicle>();
-                    List<RaceResult> raceResult = new List<RaceResult>();
+                    Console.WriteLine($"  Stopping Vehicles:");
 
                     foreach (Team team in Team.Teams)
                     {
+
                         foreach (Vehicle vehicle in team.VehiclesInTeam)
                         {
-                            allVehicles.Add(vehicle);
-                        }
+                            vehicle.Stop();
+                        }  
                     }
-
-                    foreach (Vehicle raceVehicle in allVehicles)
-                    {
-                        int resultVehicleID = raceVehicle.ID;
-                        String resultVehicleType = raceVehicle.Type;
-                        String resultVehicleMake = raceVehicle.Make;
-                        String resultVehicleModel = raceVehicle.Model;
-                        String resultCircuitName = circuit.Name;
-                        String resultTeamName = "?";
-                        double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / raceVehicle.Speed, 2);
-                        int resultPosition = 0;
-                        int resultPoints = 0;
-
-                        RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamName, resultTime, resultPosition, resultPoints);
-                        raceResult.Add(resultRecord);
-                    }
-
-                    var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
-
-                    for (int i = 0, x = 1; i < resultsOrderedBy.Count; i++, x++)
-                    {
-                        String podium = "            ";
-                        int p = resultsOrderedBy.ElementAt(i).Points;
-
-                        switch (x)
-                        {
-                            case 1:
-                                podium = "** WINNER **";
-                                p = 25;
-                                break;
-
-                            case 2:
-                                podium = "** PODIUM **";
-                                p = 18;
-                                break;
-
-                            case 3:
-                                podium = "** PODIUM **";
-                                p = 15;
-                                break;
-
-                            case 4:
-                                p = 12;
-                                break;
-
-                            case 5:
-                                p = 10;
-                                break;
-
-                            case 6:
-                                p = 8;
-                                break;
-
-                            case 7:
-                                p = 6;
-                                break;
-
-                            case 8:
-                                p = 4;
-                                break;
-
-                            case 9:
-                                p = 2;
-                                break;
-
-                            case 10:
-                                p = 1;
-                                break;
-
-                            default:
-                                break;
-                        }
-
-                        Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team{resultsOrderedBy.ElementAt(i).TeamName} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
-                    }
-
                     Console.WriteLine();
                 }
 
+        public void Results(Circuit circuit)
+        {
+            Console.WriteLine($"  Results / timings:");
 
-                public void StopAllVehicles()
-                        {
-                            Console.WriteLine($"  Stopping Vehicles:");
+            List<Vehicle> allVehicles = new List<Vehicle>();
+            List<RaceResult> raceResult = new List<RaceResult>();
 
-                            foreach (Team team in Team.Teams)
-                            {
+            foreach (Team team in Team.Teams)
+            {
+                foreach (Vehicle vehicle in team.VehiclesInTeam)
+                {
+                    allVehicles.Add(vehicle);
+                }
+            }
 
-                                foreach (Vehicle vehicle in team.VehiclesInTeam)
-                                {
-                                    vehicle.Stop();
-                                }
-                            }
+            foreach (Vehicle raceVehicle in allVehicles)
+            {
+                int resultVehicleID = raceVehicle.ID;
+                String resultVehicleType = raceVehicle.Type;
+                String resultVehicleMake = raceVehicle.Make;
+                String resultVehicleModel = raceVehicle.Model;
+                String resultCircuitName = circuit.Name;
+                String resultTeamName = "?";
+                double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / raceVehicle.Speed, 2);
+                int resultPosition = 0;
+                int resultPoints = 0;
 
-                            Console.WriteLine();
-                        }
+                RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamName, resultTime, resultPosition, resultPoints);
+                raceResult.Add(resultRecord);
+            }
 
+            var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
 
+            for (int i = 0, x = 1; i < resultsOrderedBy.Count; i++, x++)
+            {
+                String podium = "            ";
+                int p = resultsOrderedBy.ElementAt(i).Points;
+
+                switch (x)
+                {
+                    case 1:
+                        podium = "** WINNER **";
+                        p = 25;
+                        break;
+
+                    case 2:
+                        podium = "** PODIUM **";
+                        p = 18;
+                        break;
+
+                    case 3:
+                        podium = "** PODIUM **";
+                        p = 15;
+                        break;
+
+                    case 4:
+                        p = 12;
+                        break;
+
+                    case 5:
+                        p = 10;
+                        break;
+
+                    case 6:
+                        p = 8;
+                        break;
+
+                    case 7:
+                        p = 6;
+                        break;
+
+                    case 8:
+                        p = 4;
+                        break;
+
+                    case 9:
+                        p = 2;
+                        break;
+
+                    case 10:
+                        p = 1;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team{resultsOrderedBy.ElementAt(i).TeamName} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
+            }
+
+            Console.WriteLine();
+        }
     }
 }
