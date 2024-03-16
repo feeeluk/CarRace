@@ -10,16 +10,11 @@ namespace Race.Classes.Vehicles
         // ****************************************************************
         private string _type;
         private string _speedCategory;
-        private int _id;
 
 
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public static List<Vehicle> AllVehicles { get; private set; } = new List<Vehicle>();
-        public static List<Vehicle> UnassignedVehicles { get; private set; } = new List<Vehicle>();
-        public static int NumberOfVehicles { get; private set; } = 1;
-
         public string Type
         {
             get { return _type; }
@@ -67,14 +62,7 @@ namespace Race.Classes.Vehicles
                 }
             }
         }
-        public int ID
-        {
-            get { return _id; }
-            set
-            {
-                _id = NumberOfVehicles;
-            }
-        }
+        public int ID { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string Colour { get; set; }
@@ -87,7 +75,7 @@ namespace Race.Classes.Vehicles
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Vehicle(int id, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart)
+        public Vehicle(int id, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles, int numberOfVehicles)
         {
             ID = id;
             Make = make;
@@ -100,9 +88,9 @@ namespace Race.Classes.Vehicles
             SpeedCategory = speedCategory;
             VehicleStart = vehicleStart;
 
-            NumberOfVehicles++;
-            AllVehicles.Add(this);
-            UnassignedVehicles.Add(this);
+            numberOfVehicles++;
+            allVehicles.Add(this);
+            unassignedVehicles.Add(this);
         }
 
 

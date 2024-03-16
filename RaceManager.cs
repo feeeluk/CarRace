@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Race.Classes.Circuits;
 using Race.Classes.Results;
@@ -15,6 +14,7 @@ namespace Race
         // Properties
         // ****************************************************************
         public Menu Menu { get; set; }
+        public ListManager Lists { get; set; }
 
 
         // ****************************************************************
@@ -22,6 +22,7 @@ namespace Race
         // ****************************************************************
         public RaceManager()
         {
+            Lists = new ListManager();
             Initialise();
             UserInteractsWithMenu();
         }
@@ -32,15 +33,17 @@ namespace Race
         // ****************************************************************
         public void Initialise()
         {
+            
+
             // Initialize some test vehicles
-            Vehicle vehicle1 = new Car(0, "Ford", "Focus", "Black", "2013", "CAR", 4, 86, "speed category", false);
-            Vehicle vehicle2 = new Car(0, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false);
-            Vehicle vehicle3 = new Car(0, "Audi", "A5", "Grey", "2012", "car", 4, 110, "speed category", false);
-            Vehicle vehicle4 = new Car(0, "Toyota", "Corolla", "Black", "2023", "CAR", 4, 92, "speed category", false);
-            Vehicle vehicle5 = new Bike(0, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false);
-            Vehicle vehicle6 = new Bike(0, "Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false);
-            Vehicle vehicle7 = new Truck(0, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false);
-            Vehicle vehicle8 = new Truck(0, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false);
+            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", "CAR", 4, 86, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle2 = new Car(2, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle3 = new Car(3, "Audi", "A5", "Grey", "2012", "car", 4, 110, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle4 = new Car(4, "Toyota", "Corolla", "Black", "2023", "CAR", 4, 92, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle5 = new Bike(5, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle6 = new Bike(6, "Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle7 = new Truck(7, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle8 = new Truck(8, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
 
 
             // Initialize some test teams
@@ -58,15 +61,15 @@ namespace Race
 
             // Add vehicles to teams
             team1.VehiclesInTeam.Add(vehicle1);
-            Vehicle.UnassignedVehicles.Remove(vehicle1);
+            Lists.UnassignedVehicles.Remove(vehicle1);
             team1.VehiclesInTeam.Add(vehicle2);
-            Vehicle.UnassignedVehicles.Remove(vehicle2);
+            Lists.UnassignedVehicles.Remove(vehicle2);
             team2.VehiclesInTeam.Add(vehicle3);
-            Vehicle.UnassignedVehicles.Remove(vehicle3);
+            Lists.UnassignedVehicles.Remove(vehicle3);
             team2.VehiclesInTeam.Add(vehicle5);
-            Vehicle.UnassignedVehicles.Remove(vehicle5);
+            Lists.UnassignedVehicles.Remove(vehicle5);
             team2.VehiclesInTeam.Add(vehicle8);
-            Vehicle.UnassignedVehicles.Remove(vehicle8);
+            Lists.UnassignedVehicles.Remove(vehicle8);
 
 
             // Initialize some circuits
@@ -151,7 +154,7 @@ namespace Race
         ////////////////////////////////////////////////////////
         public void HowManyVehiclesAreThere()
         {
-            Console.WriteLine($"vehicles = {Vehicle.NumberOfVehicles-1}");
+            Console.WriteLine($"vehicles = {Lists.NumberOfVehicles-1}");
         }
 
         
@@ -162,7 +165,7 @@ namespace Race
             Console.WriteLine($"Every vehicle:");
             Console.WriteLine($"==============");
 
-            foreach (Vehicle vehicle in Vehicle.AllVehicles)
+            foreach (Vehicle vehicle in Lists.AllVehicles)
             {
                 Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
                 number++;
@@ -177,7 +180,7 @@ namespace Race
             Console.WriteLine("Vehicles not assigned to any team:");
             Console.WriteLine($"=================================");
 
-            foreach (Vehicle vehicle in Vehicle.UnassignedVehicles)
+            foreach (Vehicle vehicle in Lists.UnassignedVehicles)
             {
                 Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
             }
