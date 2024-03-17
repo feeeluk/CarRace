@@ -63,6 +63,7 @@ namespace Race.Classes.Vehicles
             }
         }
         public int ID { get; set; }
+        public int TeamID { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string Colour { get; set; }
@@ -70,14 +71,15 @@ namespace Race.Classes.Vehicles
         public int NumberOfWheels { get; set; }
         public int Speed { get; set; }
         public bool VehicleStart { get; private set; }
-
+        
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Vehicle(int id, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles, int numberOfVehicles)
+        public Vehicle(int id, int teamID, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles)
         {
             ID = id;
+            TeamID = teamID;
             Make = make;
             Model = model;
             Colour = colour;
@@ -88,9 +90,7 @@ namespace Race.Classes.Vehicles
             SpeedCategory = speedCategory;
             VehicleStart = vehicleStart;
 
-            numberOfVehicles++;
             allVehicles.Add(this);
-            unassignedVehicles.Add(this);
         }
 
 

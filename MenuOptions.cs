@@ -19,7 +19,6 @@ namespace Race
         Statistics,
         Show_all_vehicles,
         Show_vehicles_in_each_team,
-        Show_vehicles_not_assigned_to_any_team,
         Show_all_teams,
         Show_all_circuits,
 

@@ -22,7 +22,6 @@ namespace Race
         // ****************************************************************
         public RaceManager()
         {
-            Lists = new ListManager();
             Initialise();
             UserInteractsWithMenu();
         }
@@ -31,75 +30,80 @@ namespace Race
         // ****************************************************************
         // Methods
         // ****************************************************************
+        ////////////////////////////////////////////////////////
+        // Methods relating to Race Control
+        ////////////////////////////////////////////////////////
         public void Initialise()
         {
-            
+            // Initialize a new ListManager to store various lists of objects
+            Lists = new ListManager();
 
             // Initialize some test vehicles
-            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", "CAR", 4, 86, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle2 = new Car(2, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle3 = new Car(3, "Audi", "A5", "Grey", "2012", "car", 4, 110, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle4 = new Car(4, "Toyota", "Corolla", "Black", "2023", "CAR", 4, 92, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle5 = new Bike(5, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle6 = new Bike(6, "Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle7 = new Truck(7, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
-            Vehicle vehicle8 = new Truck(8, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles, Lists.NumberOfVehicles);
+            Vehicle vehicle1 = new Car(1, 1, "Ford", "Focus", "Black", "2013", "CAR", 4, 86, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle2 = new Car(2, 1, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle3 = new Car(3, 2, "Audi", "A5", "Grey", "2012", "car", 4, 110, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle4 = new Car(4, 2, "Toyota", "Corolla", "Black", "2023", "CAR", 4, 92, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle5 = new Bike(5, 2, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle6 = new Bike(6, 3,"Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle7 = new Truck(7, 3, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
+            Vehicle vehicle8 = new Truck(8, 3, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, Lists.AllVehicles, Lists.UnassignedVehicles);
 
 
             // Initialize some test teams
-            Team team1 = new Team(0, "Ferarri");
-            Team team2 = new Team(0, "McLaren");
-            Team team3 = new Team(0, "Mercedes");
-            Team team4 = new Team(0, "Red Bull");
-            Team team5 = new Team(0, "RB");
-            Team team6 = new Team(0, "Aston Martin");
-            Team team7 = new Team(0, "Alpine");
-            Team team8 = new Team(0, "Williams");
-            Team team9 = new Team(0, "Sauber");
-            Team team10 = new Team(0, "Haas");
+            Team team1 = new Team(1, "Ferarri", Lists.Teams);
+            Team team2 = new Team(2, "McLaren", Lists.Teams);
+            Team team3 = new Team(3, "Mercedes", Lists.Teams);
+            Team team4 = new Team(4, "Red Bull", Lists.Teams);
+            Team team5 = new Team(5, "RB", Lists.Teams);
+            Team team6 = new Team(6, "Aston Martin", Lists.Teams);
+            Team team7 = new Team(7, "Alpine", Lists.Teams);
+            Team team8 = new Team(8, "Williams", Lists.Teams);
+            Team team9 = new Team(9, "Sauber", Lists.Teams);
+            Team team10 = new Team(10, "Haas", Lists.Teams);
 
 
-            // Add vehicles to teams
+            // put cars in teams
             team1.VehiclesInTeam.Add(vehicle1);
-            Lists.UnassignedVehicles.Remove(vehicle1);
             team1.VehiclesInTeam.Add(vehicle2);
-            Lists.UnassignedVehicles.Remove(vehicle2);
-            team2.VehiclesInTeam.Add(vehicle3);
-            Lists.UnassignedVehicles.Remove(vehicle3);
+            team1.VehiclesInTeam.Add(vehicle3);
+            team2.VehiclesInTeam.Add(vehicle4);
             team2.VehiclesInTeam.Add(vehicle5);
-            Lists.UnassignedVehicles.Remove(vehicle5);
-            team2.VehiclesInTeam.Add(vehicle8);
-            Lists.UnassignedVehicles.Remove(vehicle8);
+            team3.VehiclesInTeam.Add(vehicle6);
+            team4.VehiclesInTeam.Add(vehicle7);
+            team5.VehiclesInTeam.Add(vehicle8);
 
 
             // Initialize some circuits
-            Circuit circuit1 = new Circuit(0, "Bahrain", 57, 5.4);
-            Circuit circuit2 = new Circuit(0, "Saudi Arabian", 50, 6.2);
-            Circuit circuit3 = new Circuit(0, "Australian", 58, 5.2);
-            Circuit circuit4 = new Circuit(0, "Chinese", 56, 5.6);
-            Circuit circuit5 = new Circuit(0, "Spanish", 66, 4.7);
-            Circuit circuit6 = new Circuit(0, "Monaco", 77, 3.3);
-            Circuit circuit7 = new Circuit(0, "Canadian", 70, 4.4);
-            Circuit circuit8 = new Circuit(0, "Azerbaijan", 51, 6);
-            Circuit circuit9 = new Circuit(0, "Austrian", 71, 4.3);
-            Circuit circuit10 = new Circuit(0, "British", 52, 4.4);
-            Circuit circuit11 = new Circuit(0, "Hungarian", 70, 4.4);
-            Circuit circuit12 = new Circuit(0, "Belgian", 44, 7);
-            Circuit circuit13 = new Circuit(0, "Italian", 63, 5.8);
-            Circuit circuit14 = new Circuit(0, "Singapore", 61, 4.9);
-            Circuit circuit15 = new Circuit(0, "Japanese", 53, 5.8);
-            Circuit circuit16 = new Circuit(0, "United States", 56, 5.5);
-            Circuit circuit17 = new Circuit(0, "Mexican", 71, 4.3);
-            Circuit circuit18 = new Circuit(0, "Brazilian", 71, 4.3);
-            Circuit circuit19 = new Circuit(0, "Abu Dahabi", 58, 5.6);
-            Circuit circuit20 = new Circuit(0, "Netherlands", 72, 4.3);
-            Circuit circuit21 = new Circuit(0, "Italian (Emilia-Romagna)", 63, 5);
-            Circuit circuit22 = new Circuit(0, "Qatar", 57, 5.4);
-            Circuit circuit23 = new Circuit(0, "Miami", 57, 5.4);
-            Circuit circuit24 = new Circuit(0, "Las Vegas", 50, 6.1);
+            Circuit circuit1 = new Circuit(1, "Bahrain", 57, 5.4, Lists.Circuits);
+            Circuit circuit2 = new Circuit(2, "Saudi Arabian", 50, 6.2, Lists.Circuits);
+            Circuit circuit3 = new Circuit(3, "Australian", 58, 5.2, Lists.Circuits);
+            Circuit circuit4 = new Circuit(4, "Chinese", 56, 5.6, Lists.Circuits);
+            Circuit circuit5 = new Circuit(5, "Spanish", 66, 4.7, Lists.Circuits);
+            Circuit circuit6 = new Circuit(6, "Monaco", 77, 3.3, Lists.Circuits);
+            Circuit circuit7 = new Circuit(7, "Canadian", 70, 4.4, Lists.Circuits);
+            Circuit circuit8 = new Circuit(8, "Azerbaijan", 51, 6, Lists.Circuits);
+            Circuit circuit9 = new Circuit(9, "Austrian", 71, 4.3, Lists.Circuits);
+            Circuit circuit10 = new Circuit(10, "British", 52, 4.4, Lists.Circuits);
+            Circuit circuit11 = new Circuit(11, "Hungarian", 70, 4.4, Lists.Circuits);
+            Circuit circuit12 = new Circuit(12, "Belgian", 44, 7, Lists.Circuits);
+            Circuit circuit13 = new Circuit(13, "Italian", 63, 5.8, Lists.Circuits);
+            Circuit circuit14 = new Circuit(14, "Singapore", 61, 4.9, Lists.Circuits);
+            Circuit circuit15 = new Circuit(15, "Japanese", 53, 5.8, Lists.Circuits);
+            Circuit circuit16 = new Circuit(16, "United States", 56, 5.5, Lists.Circuits);
+            Circuit circuit17 = new Circuit(17, "Mexican", 71, 4.3, Lists.Circuits);
+            Circuit circuit18 = new Circuit(18, "Brazilian", 71, 4.3, Lists.Circuits);
+            Circuit circuit19 = new Circuit(19, "Abu Dahabi", 58, 5.6, Lists.Circuits);
+            Circuit circuit20 = new Circuit(20, "Netherlands", 72, 4.3, Lists.Circuits);
+            Circuit circuit21 = new Circuit(21, "Italian (Emilia-Romagna)", 63, 5, Lists.Circuits);
+            Circuit circuit22 = new Circuit(22, "Qatar", 57, 5.4, Lists.Circuits);
+            Circuit circuit23 = new Circuit(23, "Miami", 57, 5.4, Lists.Circuits);
+            Circuit circuit24 = new Circuit(24, "Las Vegas", 50, 6.1, Lists.Circuits);
         }
 
 
+        ////////////////////////////////////////////////////////
+        // Methods relating to Menu
+        ////////////////////////////////////////////////////////
         public void UserInteractsWithMenu()
         {
             Menu menu = new Menu();
@@ -117,138 +121,31 @@ namespace Race
                         break;
 
                     case 2:
-                        HowManyTeamsAreThere();
-                        HowManyVehiclesAreThere();
-                        HowManyCircuitsAreThere();
+                        Lists.HowManyTeamsAreThere();
+                        Lists.HowManyVehiclesAreThere();
+                        Lists.HowManyCircuitsAreThere();
                         Console.WriteLine();
                         break;
 
                     case 3:
-                        ShowAllVehicles();                                          
+                        Lists.ShowAllVehicles();                                          
                         break;
 
                     case 4:
-                        ShowVehiclesInEachTeam();
+                        Lists.ShowVehiclesInEachTeam();
                         break;
 
                     case 5:
-                        ShowVehiclesNotAssignedToAnyTeam();
+                        Lists.ShowAllTeams();
                         break;
 
                     case 6:
-                        ShowAllTeams();
-                        break;
-
-                    case 7:
-                        ShowAllCircuits();
+                        Lists.ShowAllCircuits();
                         break;
                 }
             }
 
-            while (userInput != 8);
-        }
-
-
-        ////////////////////////////////////////////////////////
-        // Methods relating to Vehicles
-        ////////////////////////////////////////////////////////
-        public void HowManyVehiclesAreThere()
-        {
-            Console.WriteLine($"vehicles = {Lists.NumberOfVehicles-1}");
-        }
-
-        
-        public void ShowAllVehicles()
-        {
-            int number = 1;
-
-            Console.WriteLine($"Every vehicle:");
-            Console.WriteLine($"==============");
-
-            foreach (Vehicle vehicle in Lists.AllVehicles)
-            {
-                Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
-                number++;
-            }
-
-            Console.WriteLine();
-        }
-
-
-        public void ShowVehiclesNotAssignedToAnyTeam()
-        {
-            Console.WriteLine("Vehicles not assigned to any team:");
-            Console.WriteLine($"=================================");
-
-            foreach (Vehicle vehicle in Lists.UnassignedVehicles)
-            {
-                Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
-            }
-
-            Console.WriteLine();
-        }
-
-
-        ////////////////////////////////////////////////////////
-        // Methods relating to Team class
-        ////////////////////////////////////////////////////////
-        public void HowManyTeamsAreThere()
-        {
-            Console.WriteLine($"Teams = {Team.NumberOfTeams-1}");
-        }
-
-
-        public void ShowAllTeams()
-        {
-            int number = 1;
-            Console.WriteLine($"The teams are:");
-            foreach (Team team in Team.Teams)
-            {
-                Console.WriteLine($"- Team #{team.ID}, {team.Name}");
-                number++;
-            }
-
-            Console.WriteLine();
-        }
-
-
-        public void ShowVehiclesInEachTeam()
-        {
-            Console.WriteLine("Vehicles per team:");
-            Console.WriteLine($"=================");
-
-            foreach (Team team in Team.Teams)
-            {
-                Console.WriteLine($"     - {team.Name}");
-
-                foreach (Vehicle vehicle in team.VehiclesInTeam)
-                {
-                    Console.WriteLine($"\tVehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
-                }
-            }
-
-            Console.WriteLine();
-        }
-
-
-        ////////////////////////////////////////////////////////
-        // Methods relating to Circuits
-        ////////////////////////////////////////////////////////
-        public void HowManyCircuitsAreThere()
-        {
-            Console.WriteLine($"Circuits = {Circuit.NumberOfCircuits-1}");
-        }
-
-
-        public void ShowAllCircuits()
-        {
-            foreach(Circuit circuit in Circuit.Circuits)
-            {
-                double totalCircuitLengthKm = circuit.LapLengthKm * circuit.NumberOfLaps;
-                Console.WriteLine($"- Circuit #{circuit.ID}, {circuit.Name}, {circuit.NumberOfLaps} laps, 1xlap ={circuit.LapLengthKm}km, TOTAL LENGTH = {Math.Round(totalCircuitLengthKm, 1)}km");
-            }
-
-            Console.WriteLine();
+            while (userInput != 7);
         }
 
 
@@ -289,7 +186,6 @@ namespace Race
                 }
 
                 StartRace(circuit);
-                //ShowStatistics ask user if they want to proceed (y/n) (need to add the chosen circuit) y will start the race, n will exit completely
                 StopRace(circuit);
             }          
         }
@@ -312,7 +208,7 @@ namespace Race
                 Circuit DisplayChoiceOfCircuit(int userChoice)
                 {
                     Console.WriteLine();
-                    Circuit choice = Circuit.Circuits.ElementAt(userChoice);
+                    Circuit choice = Lists.Circuits.ElementAt(userChoice);
                     Console.WriteLine($"You have selected: #{choice.ID} - {choice.Name} Grand Prix");
                     Console.WriteLine();
                     return choice;
@@ -350,7 +246,7 @@ namespace Race
                 {
                     Console.WriteLine($"  Starting Vehicles:");
 
-                    foreach (Team team in Team.Teams)
+                    foreach (Team team in Lists.Teams)
                     {
 
                         foreach (Vehicle vehicle in team.VehiclesInTeam)
@@ -398,7 +294,7 @@ namespace Race
                 {
                     Console.WriteLine($"  Stopping Vehicles:");
 
-                    foreach (Team team in Team.Teams)
+                    foreach (Team team in Lists.Teams)
                     {
 
                         foreach (Vehicle vehicle in team.VehiclesInTeam)
@@ -413,30 +309,30 @@ namespace Race
         {
             Console.WriteLine($"  Results / timings:");
 
-            List<Vehicle> allVehicles = new List<Vehicle>();
+            List<Vehicle> raceVehicles = new List<Vehicle>();
             List<RaceResult> raceResult = new List<RaceResult>();
 
-            foreach (Team team in Team.Teams)
+            foreach (Team team in Lists.Teams)
             {
                 foreach (Vehicle vehicle in team.VehiclesInTeam)
                 {
-                    allVehicles.Add(vehicle);
+                    raceVehicles.Add(vehicle);
                 }
             }
 
-            foreach (Vehicle raceVehicle in allVehicles)
+            foreach (Vehicle raceVehicle in raceVehicles)
             {
                 int resultVehicleID = raceVehicle.ID;
                 String resultVehicleType = raceVehicle.Type;
                 String resultVehicleMake = raceVehicle.Make;
                 String resultVehicleModel = raceVehicle.Model;
                 String resultCircuitName = circuit.Name;
-                String resultTeamName = "?";
+                int resultTeamID = raceVehicle.TeamID;
                 double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / raceVehicle.Speed, 2);
                 int resultPosition = 0;
                 int resultPoints = 0;
 
-                RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamName, resultTime, resultPosition, resultPoints);
+                RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamID, resultTime, resultPosition, resultPoints);
                 raceResult.Add(resultRecord);
             }
 
@@ -496,7 +392,7 @@ namespace Race
                         break;
                 }
 
-                Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team{resultsOrderedBy.ElementAt(i).TeamName} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
+                Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team {resultsOrderedBy.ElementAt(i).TeamID} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
             }
 
             Console.WriteLine();

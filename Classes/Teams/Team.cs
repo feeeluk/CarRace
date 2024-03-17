@@ -9,36 +9,23 @@ namespace Race.Classes.Teams
         // ****************************************************************
         // Fields
         // ****************************************************************        
-        private int _id;
 
 
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public static int NumberOfTeams { get; private set; } = 1;
-        public static List<Team> Teams { get; private set; } = new List<Team>();
-
-        public int ID
-        {
-            get { return _id; }
-            private set
-            {
-                _id = NumberOfTeams;
-            }
-        }
-        public List<Vehicle> VehiclesInTeam { get; private set; } = new List<Vehicle>();
-        public string Name { get; private set; }
-
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public List<Vehicle> VehiclesInTeam { get; set; } = new List<Vehicle>();
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Team(int id, string name)
+        public Team(int id, string name, List<Team> teams)
         {
             ID = id;
             Name = name;
-            NumberOfTeams++;
-            Teams.Add(this);
+            teams.Add(this);
         }
 
 
