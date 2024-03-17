@@ -4,7 +4,7 @@
     {     
         public static void Main(string[] args)
         {
-            RaceManager raceManager = new RaceManager();
+            RaceController raceManager = new RaceController();
         }
     }
 }

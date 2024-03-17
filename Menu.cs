@@ -23,6 +23,7 @@ namespace Race
                 {
                     menuItem = menuItem.Substring(8);
                     menuItem = menuItem.Replace('_', ' ');
+                    Console.WriteLine();
                     Console.WriteLine($"{menuItem}");
                 }
 

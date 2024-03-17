@@ -5,7 +5,7 @@ namespace Race
 {
     enum MenuOptions
     {
-        HEADING_Race_Control,
+        HEADING_Race_Director,
         Start_race,
 
         HEADING_Race_Admin,
@@ -17,11 +17,11 @@ namespace Race
         IGNORE_Edit_circuit,
         IGNORE_Show_results,
         Statistics,
-        Show_all_vehicles,
-        Show_vehicles_in_each_team,
-        Show_all_teams,
-        Show_all_circuits,
-
+        Vehicles,
+        Vehicles_by_Team,
+        Teams,
+        Circuits,
+        Add_Circuit,
         HEADING_Team_Admin,
         IGNORE_Add_vehicle,
         IGNORE_Edit_vehicle,

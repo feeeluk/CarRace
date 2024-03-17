@@ -5,23 +5,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Race
+namespace Race.Classes.Managers
 {
     public class ListManager
     {
         public List<Vehicle> AllVehicles { get; set; }
-        public List<Vehicle> UnassignedVehicles { get; set; }     
+        public List<Vehicle> UnassignedVehicles { get; set; }
         public List<Team> Teams { get; private set; }
-        public List<Circuit> Circuits { get; private set; }      
-        
+        public List<Circuit> Circuits { get; private set; }
+
         public ListManager()
         {
             AllVehicles = new List<Vehicle>();
             UnassignedVehicles = new List<Vehicle>();
-            
+
             Teams = new List<Team>();
 
-            Circuits  = new List<Circuit>();
+            Circuits = new List<Circuit>();
         }
 
 
@@ -102,7 +102,7 @@ namespace Race
                 foreach (Vehicle vehicle in team.VehiclesInTeam)
                 {
                     Console.WriteLine($"    * Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
-                    
+
                 }
 
                 Console.WriteLine();
