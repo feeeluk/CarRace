@@ -121,7 +121,7 @@ namespace Race
                 switch (userInput)
                 {
                     case 1:
-                        RaceManagerObj.StartGrandPrix(ResultsManagerObj, ListManagerObj.Teams, ListManagerObj.Circuits);
+                        RaceManagerObj.StartGrandPrix(ResultsManagerObj, ListManagerObj.Teams, ListManagerObj.Circuits, ListManagerObj.SeasonResults);
                         break;
 
                     case 2:

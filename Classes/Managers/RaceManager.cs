@@ -20,7 +20,7 @@ namespace Race.Classes.Managers
         ////////////////////////////////////////////////////////
         // Methods
         ////////////////////////////////////////////////////////
-        public void StartGrandPrix(ResultManager resultsManagerObj, List<Team> teams, List<Circuit> circuits)
+        public void StartGrandPrix(ResultManager resultsManagerObj, List<Team> teams, List<Circuit> circuits, List<RaceResult> seasonResults)
         {
             Teams = teams;
             Circuits = circuits;
@@ -61,7 +61,7 @@ namespace Race.Classes.Managers
                 }
 
                 StartRace(CircuitChoice);
-                StopRace(ResultsManagerObj, CircuitChoice, Teams);
+                StopRace(ResultsManagerObj, CircuitChoice, Teams, seasonResults);
 
                 Circuit AskUserToChooseCircuit()
                 {
@@ -141,7 +141,7 @@ namespace Race.Classes.Managers
                 }
 
 
-                void StopRace(ResultManager resultsMangerObj, Circuit circuitChoice, List<Team> teams)
+                void StopRace(ResultManager resultsMangerObj, Circuit circuitChoice, List<Team> teams, List<RaceResult> seasonResults)
                 {
                     Console.WriteLine($"  The race is ending...");
                     Console.WriteLine();
@@ -150,7 +150,7 @@ namespace Race.Classes.Managers
                     StopAllVehicles();
                     Thread.Sleep(1000);
 
-                    ResultsManagerObj.RaceResults(teams, circuitChoice);
+                    ResultsManagerObj.RaceResults(teams, circuitChoice, seasonResults);
                     Thread.Sleep(1000);
 
                     Console.WriteLine($"  The Grand Prix has ended!");
