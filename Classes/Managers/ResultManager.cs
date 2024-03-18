@@ -30,28 +30,30 @@ namespace Race.Classes.Managers
                 {
                     raceVehicles.Add(vehicle);
                 }
-
-                int id = 0;
-
-                foreach (Vehicle raceVehicle in raceVehicles)
-                {
-                    int resultID = id;
-                    id++;
-                    int resultCircuitID = Circuits.ID;
-                    int resultTeamID = raceVehicle.TeamID;
-                    int resultVehicleID = raceVehicle.ID;
-                    String resultVehicleType = raceVehicle.Type;
-                    String resultVehicleMake = raceVehicle.Make;
-                    String resultVehicleModel = raceVehicle.Model;
-                    
-                    double resultTime = Math.Round((circuitChoice.NumberOfLaps * circuitChoice.LapLengthKm) / raceVehicle.Speed, 2);
-                    int resultPosition = 0;
-                    int resultPoints = 0;
-
-                    RaceResult resultRecord = new RaceResult(resultID, resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitID, resultTeamID, resultTime, resultPosition, resultPoints);
-                    raceResult.Add(resultRecord);
-                }
             }
+
+            
+            int id = 0;
+
+            foreach (Vehicle raceVehicle in raceVehicles)
+            {
+                int resultID = id;
+                id++;
+                int resultCircuitID = Circuits.ID;
+                int resultTeamID = raceVehicle.TeamID;
+                int resultVehicleID = raceVehicle.ID;
+                String resultVehicleType = raceVehicle.Type;
+                String resultVehicleMake = raceVehicle.Make;
+                String resultVehicleModel = raceVehicle.Model;
+                    
+                double resultTime = Math.Round((circuitChoice.NumberOfLaps * circuitChoice.LapLengthKm) / raceVehicle.Speed, 2);
+                int resultPosition = 0;
+                int resultPoints = 0;
+
+                RaceResult resultRecord = new RaceResult(resultID, resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitID, resultTeamID, resultTime, resultPosition, resultPoints);
+                raceResult.Add(resultRecord);
+            }
+            
 
             var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
 
