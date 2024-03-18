@@ -18,6 +18,7 @@ namespace Race
         public TeamManager TeamManagerObj { get; set; }
         public CircuitManager CircuitManagerObj { get; set; }
         public RaceManager RaceManagerObj { get; set; }
+        public ResultManager ResultsManagerObj { get; set; }
 
 
         // ****************************************************************
@@ -35,12 +36,12 @@ namespace Race
         // ****************************************************************
         public void Initialise()
         {
-            // Initialize objects of various helper classes
-            Menu = new Menu(); 
+            // Initialize objects of various manager classes 
             ListManagerObj = new ListManager();
             TeamManagerObj = new TeamManager();
             CircuitManagerObj = new CircuitManager();
             RaceManagerObj = new RaceManager();
+            ResultsManagerObj = new ResultManager();
 
 
             // Initialize some test vehicles
@@ -108,6 +109,8 @@ namespace Race
 
         public void UserInteractsWithMenu()
         {
+            Menu = new Menu();
+
             int userInput;
 
             do
@@ -118,7 +121,7 @@ namespace Race
                 switch (userInput)
                 {
                     case 1:
-                        StartGrandPrix();
+                        RaceManagerObj.StartGrandPrix(ResultsManagerObj, ListManagerObj.Teams, ListManagerObj.Circuits);
                         break;
 
                     case 2:
@@ -145,262 +148,17 @@ namespace Race
                         break;
 
                     case 7:
-                        CircuitManagerObj.AddCircuit(ListManagerObj.Circuits);
-                        break;
-                }
-            }
-
-            while (userInput != 8);
-        }
-
-
-        ////////////////////////////////////////////////////////
-        // Methods relating to Race Control
-        ////////////////////////////////////////////////////////
-        public void StartGrandPrix()
-        {
-            int x = 0;
-
-            while (x == 0)
-            {
-                Circuit circuit = AskUserToChooseCircuit();
-                String answer = ConfirmChoiceOfCircuit();
-
-                switch (answer)
-                {
-                    case "y":
-                    case "Y":
-                        Console.WriteLine("");
-                        x = 1;                           
-                        break;
-
-                    case "n":
-                    case "N":
-                        Console.WriteLine("");
-                        continue;
-
-                    case "x":
-                    case "X":
-                        Console.WriteLine("");
-                        return;
-                        
-                    default:
-                        Console.WriteLine("invalid response, please press 'y', 'n' or 'x'");
-                        Console.WriteLine();
-                        continue;
-                }
-
-                StartRace(circuit);
-                StopRace(circuit);
-            }          
-        }
-
-
-        Circuit AskUserToChooseCircuit()
-        {
-            int userChoice = GetChoiceOfCircuit();
-            return DisplayChoiceOfCircuit(userChoice);
-        }
-
-
-                int GetChoiceOfCircuit()
-                {
-                    Console.WriteLine($"Which circuit do you want to choose?");
-                    return Convert.ToInt32(Console.ReadLine()) - 1;
-                }
-
-
-                Circuit DisplayChoiceOfCircuit(int userChoice)
-                {
-                    Console.WriteLine();
-                    Circuit choice = ListManagerObj.Circuits.ElementAt(userChoice);
-                    Console.WriteLine($"You have selected: #{choice.ID} - {choice.Name} Grand Prix");
-                    Console.WriteLine();
-                    return choice;
-                }
-
-
-        String ConfirmChoiceOfCircuit()
-        {
-            Console.WriteLine($"Is this correct?");
-            Console.WriteLine($"y(yes) n(no) x(exit)");
-            return Console.ReadLine();
-        }
-
-
-        public void StartRace(Circuit circuit)
-        {
-            Console.WriteLine($"  The {circuit.Name} Grand Prix has started!");
-            Console.WriteLine($"  =========================================");
-            Console.WriteLine();
-            Thread.Sleep(1000);
-
-            Console.WriteLine($"  Circuit details: Number of laps:{circuit.NumberOfLaps}, Distance per lap: {circuit.LapLengthKm}km, total distance {circuit.NumberOfLaps * circuit.LapLengthKm}km");
-            Console.WriteLine();
-            Thread.Sleep(1000);
-
-            StartAllVehicles();
-            Thread.Sleep(1000);
-
-            ShowEachLap(circuit);
-            Thread.Sleep(1000);
-        }
-
-
-                public void StartAllVehicles()
-                {
-                    Console.WriteLine($"  Starting Vehicles:");
-
-                    foreach (Team team in ListManagerObj.Teams)
-                    {
-
-                        foreach (Vehicle vehicle in team.VehiclesInTeam)
-                        {
-                            vehicle.Start();
-                        }
-                    }
-
-                    Console.WriteLine();
-                }
-
-                public void ShowEachLap(Circuit circuit)
-                {
-                    Console.WriteLine($"   Race progress");
-
-                    for (int i = 1; i <= circuit.NumberOfLaps; i++ )
-                    {
-                        Console.WriteLine($"   Lap number {i}");
-                        Thread.Sleep(25);
-                    }
-
-                    Console.WriteLine();
-                }
-
-
-        public void StopRace(Circuit circuit)
-        {
-            Console.WriteLine($"  The race is ending...");
-            Console.WriteLine();
-            Thread.Sleep(1000);
-
-            StopAllVehicles();
-            Thread.Sleep(1000);
-
-            Results(circuit);
-            Thread.Sleep(1000);
-
-            Console.WriteLine($"  The Grand Prix has ended!");
-            Console.WriteLine($"  =========================");
-            Console.WriteLine();
-        }
-
-
-                public void StopAllVehicles()
-                {
-                    Console.WriteLine($"  Stopping Vehicles:");
-
-                    foreach (Team team in ListManagerObj.Teams)
-                    {
-
-                        foreach (Vehicle vehicle in team.VehiclesInTeam)
-                        {
-                            vehicle.Stop();
-                        }  
-                    }
-                    Console.WriteLine();
-                }
-
-        public void Results(Circuit circuit)
-        {
-            Console.WriteLine($"  Results / timings:");
-
-            List<Vehicle> raceVehicles = new List<Vehicle>();
-            List<RaceResult> raceResult = new List<RaceResult>();
-
-            foreach (Team team in ListManagerObj.Teams)
-            {
-                foreach (Vehicle vehicle in team.VehiclesInTeam)
-                {
-                    raceVehicles.Add(vehicle);
-                }
-            }
-
-            foreach (Vehicle raceVehicle in raceVehicles)
-            {
-                int resultVehicleID = raceVehicle.ID;
-                String resultVehicleType = raceVehicle.Type;
-                String resultVehicleMake = raceVehicle.Make;
-                String resultVehicleModel = raceVehicle.Model;
-                String resultCircuitName = circuit.Name;
-                int resultTeamID = raceVehicle.TeamID;
-                double resultTime = Math.Round((circuit.NumberOfLaps * circuit.LapLengthKm) / raceVehicle.Speed, 2);
-                int resultPosition = 0;
-                int resultPoints = 0;
-
-                RaceResult resultRecord = new RaceResult(resultVehicleID, resultVehicleType, resultVehicleMake, resultVehicleModel, resultCircuitName, resultTeamID, resultTime, resultPosition, resultPoints);
-                raceResult.Add(resultRecord);
-            }
-
-            var resultsOrderedBy = raceResult.OrderBy(x => x.Time).ToList();
-
-            for (int i = 0, x = 1; i < resultsOrderedBy.Count; i++, x++)
-            {
-                String podium = "            ";
-                int p = resultsOrderedBy.ElementAt(i).Points;
-
-                switch (x)
-                {
-                    case 1:
-                        podium = "** WINNER **";
-                        p = 25;
-                        break;
-
-                    case 2:
-                        podium = "** PODIUM **";
-                        p = 18;
-                        break;
-
-                    case 3:
-                        podium = "** PODIUM **";
-                        p = 15;
-                        break;
-
-                    case 4:
-                        p = 12;
-                        break;
-
-                    case 5:
-                        p = 10;
-                        break;
-
-                    case 6:
-                        p = 8;
-                        break;
-
-                    case 7:
-                        p = 6;
+                        var numberOfCircuits = ListManagerObj.HowManyCircuits();
+                        CircuitManagerObj.AddCircuit(numberOfCircuits, ListManagerObj.Circuits);
                         break;
 
                     case 8:
-                        p = 4;
-                        break;
-
-                    case 9:
-                        p = 2;
-                        break;
-
-                    case 10:
-                        p = 1;
-                        break;
-
-                    default:
+                        ListManagerObj.ShowSeasonResults();
                         break;
                 }
-
-                Console.WriteLine($"   {podium} - #{x} {p}pts, {resultsOrderedBy.ElementAt(i).Time}hrs/mins - Team {resultsOrderedBy.ElementAt(i).TeamID} Vehicle #{resultsOrderedBy.ElementAt(i).VehicleID}, ({resultsOrderedBy.ElementAt(i).VehicleType}), {resultsOrderedBy.ElementAt(i).VehicleMake} {resultsOrderedBy.ElementAt(i).VehicleModel}");
             }
 
-            Console.WriteLine();
-        }
+            while (userInput != 9 );
+        }       
     }
 }

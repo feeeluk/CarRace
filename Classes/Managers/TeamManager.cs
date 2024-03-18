@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Race.Classes.Managers
+﻿namespace Race.Classes.Managers
 {
     public class TeamManager
     {

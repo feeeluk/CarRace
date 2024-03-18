@@ -22,6 +22,7 @@ namespace Race
         Teams,
         Circuits,
         Add_Circuit,
+        Season_results,
         HEADING_Team_Admin,
         IGNORE_Add_vehicle,
         IGNORE_Edit_vehicle,

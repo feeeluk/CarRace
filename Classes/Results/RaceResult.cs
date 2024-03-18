@@ -8,11 +8,12 @@ namespace Race.Classes.Results
         // ****************************************************************
         // Properties
         // ****************************************************************
+        public int ID { get; set; }
         public int VehicleID { get; set; }
         public string VehicleType { get; set; }
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }
-        public string CircuitName { get; set; }
+        public int CircuitID { get; set; }
         public int TeamID { get; set; }
         public double Time { get; set; }
         public int Position { get; set; }
@@ -22,13 +23,14 @@ namespace Race.Classes.Results
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public RaceResult(int vehicle, string type, string make, string model, string circuit, int teamID, double time, int position, int points)
+        public RaceResult(int id, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points)
         {
+            ID = id;
             VehicleID = vehicle;
             VehicleType = type;
             VehicleMake = make;
             VehicleModel = model;
-            CircuitName = circuit;
+            CircuitID = circuit;
             Time = time;
             Position = position;
             Points = points;
