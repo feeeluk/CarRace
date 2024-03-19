@@ -15,7 +15,7 @@ namespace Race.Classes.Vehicles
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public string Type
+        public string VehicleType
         {
             get { return _type; }
             set
@@ -41,35 +41,35 @@ namespace Race.Classes.Vehicles
                 }
             }
         }
-        public string SpeedCategory
+        public string VehicleSpeedCategory
         {
             get { return _speedCategory; }
             set
             {
-                if (Speed < 65)
+                if (VehicleSpeed < 65)
                 {
                     _speedCategory = "slow";
                 }
 
-                else if (Speed >= 65 && Speed < 90)
+                else if (VehicleSpeed >= 65 && VehicleSpeed < 90)
                 {
                     _speedCategory = "average";
                 }
 
-                if (Speed >= 90)
+                if (VehicleSpeed >= 90)
                 {
                     _speedCategory = "fast";
                 }
             }
         }
-        public int ID { get; set; }
-        public int TeamID { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public string Colour { get; set; }
-        public string Year { get; set; }
-        public int NumberOfWheels { get; set; }
-        public int Speed { get; set; }
+        public int VehicleID { get; set; }
+        public int VehicleTeamID { get; set; }
+        public string VehicleMake { get; set; }
+        public string VehicleModel { get; set; }
+        public string VehicleColour { get; set; }
+        public string VehicleYear { get; set; }
+        public int VehicleNumberOfWheels { get; set; }
+        public int VehicleSpeed { get; set; }
         public bool VehicleStart { get; private set; }
         
 
@@ -78,16 +78,16 @@ namespace Race.Classes.Vehicles
         // ****************************************************************
         public Vehicle(int id, int teamID, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles)
         {
-            ID = id;
-            TeamID = teamID;
-            Make = make;
-            Model = model;
-            Colour = colour;
-            Year = year;
-            Type = type;
-            NumberOfWheels = noOfWheels;
-            Speed = speed;
-            SpeedCategory = speedCategory;
+            VehicleID = id;
+            VehicleTeamID = teamID;
+            VehicleMake = make;
+            VehicleModel = model;
+            VehicleColour = colour;
+            VehicleYear = year;
+            VehicleType = type;
+            VehicleNumberOfWheels = noOfWheels;
+            VehicleSpeed = speed;
+            VehicleSpeedCategory = speedCategory;
             VehicleStart = vehicleStart;
 
             allVehicles.Add(this);
@@ -100,20 +100,20 @@ namespace Race.Classes.Vehicles
         public virtual void Start()
         {
             VehicleStart = true;
-            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has started moving");
+            Console.WriteLine($"  - Vehicle #{VehicleID} - ({VehicleType}) has started moving");
         }
 
 
         public virtual void Stop()
         {
             VehicleStart = false;
-            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has stopped moving");
+            Console.WriteLine($"  - Vehicle #{VehicleID} - ({VehicleType}) has stopped moving");
         }
 
 
         public virtual void Crash()
         {
-            Console.WriteLine($"  - Vehicle #{ID} - ({Type}) has crashed.");
+            Console.WriteLine($"  - Vehicle #{VehicleID}  - ( {VehicleType}) has crashed.");
         }
 
 

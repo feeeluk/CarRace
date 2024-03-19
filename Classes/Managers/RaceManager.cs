@@ -12,6 +12,7 @@ namespace Race.Classes.Managers
         // ****************************************************************
         List<Team> Teams { get; set; }
         List<Circuit> Circuits { get; set; }
+        //List<RaceResult> SeasonResults { get; set; }
         Circuit CircuitChoice { get; set; }
         String CircuitAnswer { get; set; }
         ResultManager ResultsManagerObj { get; set; }

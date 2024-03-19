@@ -8,7 +8,7 @@ namespace Race.Classes.Results
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public int ID { get; set; }
+        public int ResultID { get; set; }
         public int VehicleID { get; set; }
         public string VehicleType { get; set; }
         public string VehicleMake { get; set; }
@@ -18,14 +18,16 @@ namespace Race.Classes.Results
         public double Time { get; set; }
         public int Position { get; set; }
         public int Points { get; set; }
+        public bool Winner { get; set; }
+        public bool Podium { get; set; }
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public RaceResult(int id, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points)
+        public RaceResult(int id, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
         {
-            ID = id;
+            ResultID = id;
             VehicleID = vehicle;
             VehicleType = type;
             VehicleMake = make;
@@ -35,6 +37,8 @@ namespace Race.Classes.Results
             Position = position;
             Points = points;
             TeamID = teamID;
+            Winner = winner;
+            Podium = podium;
         }
     }
 }

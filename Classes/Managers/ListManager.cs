@@ -17,7 +17,8 @@ namespace Race.Classes.Managers
         //public List<RaceResult> RaceResults { get; set; }
         public List<RaceResult> SeasonResults { get; set; }
 
-        
+
+
         // ****************************************************************
         // Constructor
         // ****************************************************************
@@ -50,7 +51,7 @@ namespace Race.Classes.Managers
 
             foreach (Vehicle vehicle in AllVehicles)
             {
-                Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
+                Console.WriteLine($"    - Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType.ToUpper()}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
                 number++;
             }
 
@@ -65,7 +66,7 @@ namespace Race.Classes.Managers
 
             foreach (Vehicle vehicle in UnassignedVehicles)
             {
-                Console.WriteLine($"    - Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
+                Console.WriteLine($"    - Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType.ToUpper()}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
             }
 
             Console.WriteLine();
@@ -108,7 +109,7 @@ namespace Race.Classes.Managers
 
                 foreach (Vehicle vehicle in team.VehiclesInTeam)
                 {
-                    Console.WriteLine($"    * Vehicle #{vehicle.ID} - {vehicle.Type.ToUpper()}, {vehicle.Make}, {vehicle.Model}, {vehicle.Colour}, {vehicle.Year}, {vehicle.SpeedCategory.ToUpper()}");
+                    Console.WriteLine($"    * Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType.ToUpper()}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
 
                 }
 
@@ -147,22 +148,22 @@ namespace Race.Classes.Managers
         }
 
 
-        ////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
         // Methods relating to Team
-        ////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
         public void ShowSeasonResults()
         {
-            var grouped = SeasonResults.GroupBy(SeasonResults => new { SeasonResults.CircuitID, SeasonResults.TeamID});
-            //var grouped = SeasonResults.GroupBy(x => x.CircuitID).ToList();
+            var grouped = SeasonResults.GroupBy(SeasonResults => new { SeasonResults.CircuitID });
 
-            //for (int i =0; i < grouped.Count(); i++)
-            foreach(var group in grouped)
+            foreach (var group in grouped)
             {
-                foreach(var result in group)
+                foreach (var result in group)
                 {
                     Console.WriteLine($"Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}");
                 }
             }
+
+            Console.WriteLine();
         }
 
     }
