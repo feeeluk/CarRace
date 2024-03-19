@@ -14,9 +14,7 @@ namespace Race.Classes.Managers
         public List<Vehicle> UnassignedVehicles { get; set; }
         public List<Team> Teams { get; set; }
         public List<Circuit> Circuits { get; set; }
-        //public List<RaceResult> RaceResults { get; set; }
         public List<RaceResult> SeasonResults { get; set; }
-
 
 
         // ****************************************************************
@@ -28,7 +26,6 @@ namespace Race.Classes.Managers
             UnassignedVehicles = new List<Vehicle>();
             Teams = new List<Team>();
             Circuits = new List<Circuit>();
-            //RaceResults = new List<RaceResult>();
             SeasonResults = new List<RaceResult>();
         }
 
@@ -155,11 +152,14 @@ namespace Race.Classes.Managers
         {
             var grouped = SeasonResults.GroupBy(SeasonResults => new { SeasonResults.CircuitID });
 
+            Console.WriteLine($"  Show all season's race results");
+            Console.WriteLine($"  ==============================");
+
             foreach (var group in grouped)
             {
                 foreach (var result in group)
                 {
-                    Console.WriteLine($"Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}");
+                    Console.WriteLine($"  Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}");
                 }
             }
 

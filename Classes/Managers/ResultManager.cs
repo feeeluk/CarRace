@@ -133,6 +133,7 @@ namespace Race.Classes.Managers
                             break;
 
                         default:
+                            points = 0;
                             break;
                     }
 
@@ -169,8 +170,8 @@ namespace Race.Classes.Managers
 
             void ShowRaceResultsList()
             {
-                String stringPodium = "            ";
-                String stringWinner = "            ";
+                String stringPodium;
+                String stringWinner;
 
                 Console.WriteLine($"  Results / timings:");
 
@@ -182,17 +183,24 @@ namespace Race.Classes.Managers
                             stringWinner = "** WINNER **";
                             stringPodium = "";
                             break;
+
                         case 2:
                             stringWinner = "";
                             stringPodium = "** PODIUM **";
                             break;
+
                         case 3:
                             stringWinner = "";
                             stringPodium = "** PODIUM **";
                             break;
+
+                        default:
+                            stringPodium = "      ";
+                            stringWinner = "      ";
+                            break;
                     }
 
-                    Console.WriteLine($"   {stringWinner}{stringPodium} - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts,  (result ID{raceResult.ElementAt(i).ResultID}) {raceResult.ElementAt(i).Time}hrs/mins - Team {raceResult.ElementAt(i).TeamID} Vehicle #{raceResult.ElementAt(i).VehicleID}, ({raceResult.ElementAt(i).VehicleType}), {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel}");
+                    Console.WriteLine($"   {stringWinner}{stringPodium} - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts, (result ID{raceResult.ElementAt(i).ResultID}) {raceResult.ElementAt(i).Time}hrs/mins - Team {raceResult.ElementAt(i).TeamID} Vehicle #{raceResult.ElementAt(i).VehicleID}, ({raceResult.ElementAt(i).VehicleType}), {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel}");
                 }
 
                 Console.WriteLine();
