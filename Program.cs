@@ -4,7 +4,7 @@
     {     
         public static void Main(string[] args)
         {
-            RaceController raceManager = new RaceController();
+            RaceStagingArea raceManager = new RaceStagingArea();
         }
     }
 }

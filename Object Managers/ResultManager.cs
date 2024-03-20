@@ -7,17 +7,17 @@ namespace Race.Classes.Managers
 {
     public class ResultManager
     {
-
         // ****************************************************************
         // Properties
         // ****************************************************************
-
+        public List<RaceResult> SeasonResults { get; private set; }
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
         public ResultManager()
         {
+            SeasonResults = new List<RaceResult>();
         }
 
         ////////////////////////////////////////////////////////
@@ -78,9 +78,9 @@ namespace Race.Classes.Managers
 
             void UpdateRaceResultsList()
             {
-                bool podium = false;
-                bool winner = false;
-                int points = 0;
+                bool podium;
+                bool winner;
+                int points;
 
                 raceResult = raceResult.OrderBy(x => x.Time).ToList();
 
@@ -89,50 +89,68 @@ namespace Race.Classes.Managers
                     switch (x)
                     {
                         case 1:
-                            podium = true;
                             winner = true;
+                            podium = true;
                             points = 25;
                             break;
 
                         case 2:
+                            winner = false; 
                             podium = true;
                             points = 18;
                             break;
 
                         case 3:
+                            winner = false;
                             podium = true;
                             points = 15;
                             break;
 
                         case 4:
+                            winner = false;
+                            podium = false;
                             points = 12;
                             break;
 
                         case 5:
+                            winner = false;
+                            podium = false;
                             points = 10;
                             break;
 
                         case 6:
+                            winner = false;
+                            podium = false;
                             points = 8;
                             break;
 
                         case 7:
+                            winner = false;
+                            podium = false;
                             points = 6;
                             break;
 
                         case 8:
+                            winner = false;
+                            podium = false;
                             points = 4;
                             break;
 
                         case 9:
+                            winner = false;
+                            podium = false;
                             points = 2;
                             break;
 
                         case 10:
+                            winner = false;
+                            podium = false;
                             points = 1;
                             break;
 
                         default:
+                            winner = false;
+                            podium = false; 
                             points = 0;
                             break;
                     }
@@ -147,8 +165,8 @@ namespace Race.Classes.Managers
                     double resultTime = raceResult.ElementAt(i).Time;
                     int resultPosition = x;
                     int resultPoints = points;
-                    bool resultWinner = raceResult.ElementAt(i).Winner;
-                    bool resultPodium = raceResult.ElementAt(i).Podium;
+                    bool resultWinner = winner;
+                    bool resultPodium = podium;
 
                     newVehicleRaceResultRecord = new RaceResult(resultID,
                                                     resultVehicleID,
@@ -210,17 +228,20 @@ namespace Race.Classes.Managers
 
         public void ShowSeasonResults()
         {
-            //var grouped = SeasonResults.GroupBy(SeasonResults => new { SeasonResults.CircuitID });
+            var grouped = SeasonResults.GroupBy(SeasonResults => new { SeasonResults.CircuitID });
 
-            //foreach (var group in grouped)
-            //{
-            //    foreach (var result in group)
-            //    {
-            //        Console.WriteLine($"Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}");
-            //    }
-            //}
+            Console.WriteLine($"  Show all season's race results");
+            Console.WriteLine($"  ==============================");
 
-            //Console.WriteLine();
+            foreach (var group in grouped)
+            {
+                foreach (var result in group)
+                {
+                    Console.WriteLine($"  Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
+                }
+            }
+
+            Console.WriteLine();
         }
 
 

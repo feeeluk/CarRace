@@ -1,32 +1,25 @@
 ﻿using Race.Classes.Circuits;
+using Race.Classes.Managers;
 using Race.Classes.Results;
 using Race.Classes.Teams;
 using Race.Classes.Vehicles;
 
-namespace Race.Classes.Managers
+namespace Race.Users
 {
-    public class RaceManager
+    public class RaceDirector
     {
         // ****************************************************************
         // Properties
         // ****************************************************************
-        List<Team> Teams { get; set; }
-        List<Circuit> Circuits { get; set; }
-        //List<RaceResult> SeasonResults { get; set; }
         Circuit CircuitChoice { get; set; }
         String CircuitAnswer { get; set; }
-        ResultManager ResultsManagerObj { get; set; }
 
 
-        ////////////////////////////////////////////////////////
+        // ****************************************************************
         // Methods
-        ////////////////////////////////////////////////////////
+        // ****************************************************************
         public void StartGrandPrix(ResultManager resultsManagerObj, List<Team> teams, List<Circuit> circuits, List<RaceResult> seasonResults)
         {
-            Teams = teams;
-            Circuits = circuits;
-            ResultsManagerObj = resultsManagerObj;
-
             int x = 0;
 
             Console.WriteLine($"  Start race");
@@ -62,7 +55,8 @@ namespace Race.Classes.Managers
                 }
 
                 StartRace(CircuitChoice);
-                StopRace(ResultsManagerObj, CircuitChoice, Teams, seasonResults);
+                StopRace(resultsManagerObj, CircuitChoice, teams, seasonResults);
+
 
                 Circuit AskUserToChooseCircuit()
                 {
@@ -78,7 +72,7 @@ namespace Race.Classes.Managers
                     Circuit DisplayChoiceOfCircuit(int userChoice)
                     {
                         Console.WriteLine();
-                        Circuit choice = Circuits.ElementAt(userChoice);
+                        Circuit choice = circuits.ElementAt(userChoice);
                         Console.WriteLine($"  You have selected: #{choice.ID} - {choice.Name} Grand Prix");
                         Console.WriteLine();
                         return choice;
@@ -86,7 +80,7 @@ namespace Race.Classes.Managers
                 }
 
 
-                String ConfirmChoiceOfCircuit()
+                string ConfirmChoiceOfCircuit()
                 {
                     Console.WriteLine($"  Is this correct? y(yes) n(no) x(exit)");
                     return Console.ReadLine();
@@ -115,7 +109,7 @@ namespace Race.Classes.Managers
                     {
                         Console.WriteLine($"  Starting Vehicles:");
 
-                        foreach (Team team in Teams)
+                        foreach (Team team in teams)
                         {
 
                             foreach (Vehicle vehicle in team.VehiclesInTeam)
@@ -151,7 +145,7 @@ namespace Race.Classes.Managers
                     StopAllVehicles();
                     Thread.Sleep(1000);
 
-                    ResultsManagerObj.RaceResults(teams, circuitChoice, seasonResults);
+                    resultsManagerObj.RaceResults(teams, circuitChoice, seasonResults);
                     Thread.Sleep(1000);
 
                     Console.WriteLine($"  The Grand Prix has ended!");
@@ -163,7 +157,7 @@ namespace Race.Classes.Managers
                     {
                         Console.WriteLine($"  Stopping Vehicles:");
 
-                        foreach (Team team in Teams)
+                        foreach (Team team in teams)
                         {
 
                             foreach (Vehicle vehicle in team.VehiclesInTeam)
@@ -175,9 +169,11 @@ namespace Race.Classes.Managers
                         Console.WriteLine();
                     }
                 }
-                //
+
+
             }
-            //
         }
+
+
     }
 }
