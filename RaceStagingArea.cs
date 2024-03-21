@@ -167,9 +167,13 @@ namespace Race
                         break;
 
                     case 2:
+                        Console.WriteLine($"  Show statistics");
+                        Console.WriteLine($"  ===============");
                         TeamManagerObj.HowManyTeamsAreThere();
                         VehicleManagerObj.HowManyVehiclesAreThere();
                         CircuitManagerObj.HowManyCircuitsAreThere();
+                        ResultManagerObj.HowManyRacesHaveThereBeen();
+
                         Console.WriteLine();
                         break;
 

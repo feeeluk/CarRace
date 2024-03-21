@@ -20,14 +20,16 @@ namespace Race.Classes.Results
         public int Points { get; set; }
         public bool Winner { get; set; }
         public bool Podium { get; set; }
+        public DateTime ResultDate {  get; set; }
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public RaceResult(int id, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
+        public RaceResult(int id, DateTime resultDate, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
         {
             ResultID = id;
+            ResultDate = resultDate;
             VehicleID = vehicle;
             VehicleType = type;
             VehicleMake = make;

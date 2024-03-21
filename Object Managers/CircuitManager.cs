@@ -23,7 +23,7 @@ namespace Race.Classes.Managers
         // ****************************************************************
         public void HowManyCircuitsAreThere()
         {
-            Console.WriteLine($"Circuits = {Circuits.Count}");
+            Console.WriteLine($"  Circuits = {Circuits.Count}");
         }
 
 

@@ -29,7 +29,7 @@ namespace Race.Classes.Managers
         // ****************************************************************
         public void HowManyVehiclesAreThere()
         {
-            Console.WriteLine($"vehicles = {AllVehicles.Count}");
+            Console.WriteLine($"  vehicles = {AllVehicles.Count}");
         }
 
 

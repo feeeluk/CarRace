@@ -25,7 +25,7 @@ namespace Race.Classes.Managers
         // ****************************************************************
         public void HowManyTeamsAreThere()
         {
-            Console.WriteLine($"Teams = {Teams.Count}");
+            Console.WriteLine($"  Teams = {Teams.Count}");
         }
 
 

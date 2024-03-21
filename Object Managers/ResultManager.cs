@@ -2,6 +2,7 @@
 using Race.Classes.Results;
 using Race.Classes.Teams;
 using Race.Classes.Vehicles;
+using System.Globalization;
 
 namespace Race.Classes.Managers
 {
@@ -47,6 +48,7 @@ namespace Race.Classes.Managers
                 for (int i = 0; i < vehiclesInRace.Count(); i++)
                 {
                     int resultID = i;
+                    DateTime resultDate = DateTime.Now;
                     int resultCircuitID = circuitChoice.ID;
                     int resultTeamID = vehiclesInRace.ElementAt(i).VehicleTeamID;
                     int resultVehicleID = vehiclesInRace.ElementAt(i).VehicleID;
@@ -60,6 +62,7 @@ namespace Race.Classes.Managers
                     bool resultPodium = false;
 
                     originalVehicleRaceResultRecord = new RaceResult(resultID,
+                                                    resultDate, 
                                                     resultVehicleID,
                                                     resultVehicleType,
                                                     resultVehicleMake,
@@ -156,6 +159,7 @@ namespace Race.Classes.Managers
                     }
 
                     int resultID = raceResult.ElementAt(i).ResultID;
+                    DateTime resultDate = raceResult.ElementAt(i).ResultDate;
                     int resultCircuitID = raceResult.ElementAt(i).CircuitID;
                     int resultTeamID = raceResult.ElementAt(i).TeamID;
                     int resultVehicleID = raceResult.ElementAt(i).VehicleID;
@@ -169,6 +173,7 @@ namespace Race.Classes.Managers
                     bool resultPodium = podium;
 
                     newVehicleRaceResultRecord = new RaceResult(resultID,
+                                                    resultDate,             
                                                     resultVehicleID,
                                                     resultVehicleType,
                                                     resultVehicleMake,
@@ -237,7 +242,7 @@ namespace Race.Classes.Managers
             {
                 foreach (var result in group)
                 {
-                    Console.WriteLine($"  Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
+                    Console.WriteLine($"  Day: {result.ResultDate}, Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
                 }
             }
 
@@ -245,5 +250,22 @@ namespace Race.Classes.Managers
         }
 
 
+        public void HowManyRacesHaveThereBeen()
+        {
+            var distinctVehicles = SeasonResults.GroupBy(x => x.VehicleID).Distinct();
+            var countDistinctVehicles = distinctVehicles.Count();
+            
+            var distinctRaceDates = SeasonResults.GroupBy(x => x.ResultDate).Distinct();
+            var countDistinctRaceDates = distinctRaceDates.Count();
+            
+            if (countDistinctVehicles != 0 || countDistinctRaceDates != 0)
+            {
+                Console.WriteLine($"  Races run = {countDistinctVehicles / countDistinctRaceDates}");
+            }
+            else
+            {
+                Console.WriteLine($"  Races run = {0}"); 
+            }
+        }
     }
 }
