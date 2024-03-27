@@ -1,8 +1,7 @@
-﻿using Race.Classes.Circuits;
-using Race.Classes.Results;
-using Race.Classes.Teams;
-using Race.Classes.Vehicles;
-using System.Globalization;
+﻿using Race.Classes.Vehicles;
+using Race.Objects.Circuits;
+using Race.Objects.Results;
+using Race.Objects.Teams;
 
 namespace Race.Classes.Managers
 {
@@ -24,7 +23,7 @@ namespace Race.Classes.Managers
         ////////////////////////////////////////////////////////
         // Methods
         ////////////////////////////////////////////////////////
-        public void RaceResults(List<Team> teams, Circuit circuitChoice, List<RaceResult> seasonResults)
+        public void RaceResults(List<Team> teams, Circuit circuitChoice, List<RaceResult> seasonResults, List<Vehicle> vehicles )
         {
             List<Vehicle> vehiclesInRace = new List<Vehicle>();
             List<RaceResult> raceResult = new List<RaceResult>();
@@ -37,12 +36,9 @@ namespace Race.Classes.Managers
 
             void CreateRaceResultsList()
             {
-                foreach (Team team in teams)
+                foreach (Vehicle vehicle in vehicles)
                 {
-                    foreach (Vehicle vehicle in team.VehiclesInTeam)
-                    {
                         vehiclesInRace.Add(vehicle);
-                    }
                 }
 
                 for (int i = 0; i < vehiclesInRace.Count(); i++)
@@ -52,7 +48,7 @@ namespace Race.Classes.Managers
                     int resultCircuitID = circuitChoice.ID;
                     int resultTeamID = vehiclesInRace.ElementAt(i).VehicleTeamID;
                     int resultVehicleID = vehiclesInRace.ElementAt(i).VehicleID;
-                    String resultVehicleType = vehiclesInRace.ElementAt(i).VehicleType;
+                    VehicleType resultVehicleType = vehiclesInRace.ElementAt(i).VehicleType;
                     String resultVehicleMake = vehiclesInRace.ElementAt(i).VehicleMake;
                     String resultVehicleModel = vehiclesInRace.ElementAt(i).VehicleModel;
                     double resultTime = Math.Round((circuitChoice.NumberOfLaps * circuitChoice.LapLengthKm) / vehiclesInRace.ElementAt(i).VehicleSpeed, 2);
@@ -163,7 +159,7 @@ namespace Race.Classes.Managers
                     int resultCircuitID = raceResult.ElementAt(i).CircuitID;
                     int resultTeamID = raceResult.ElementAt(i).TeamID;
                     int resultVehicleID = raceResult.ElementAt(i).VehicleID;
-                    String resultVehicleType = raceResult.ElementAt(i).VehicleType;
+                    VehicleType resultVehicleType = raceResult.ElementAt(i).VehicleType;
                     String resultVehicleMake = raceResult.ElementAt(i).VehicleMake;
                     String resultVehicleModel = raceResult.ElementAt(i).VehicleModel;
                     double resultTime = raceResult.ElementAt(i).Time;

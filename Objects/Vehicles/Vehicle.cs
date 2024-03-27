@@ -1,94 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Race.Classes.Vehicles
+﻿namespace Race.Classes.Vehicles
 {
     public abstract class Vehicle
     {
         // ****************************************************************
         // Fields
         // ****************************************************************
-        private string _type;
         private string _speedCategory;
 
 
         // ****************************************************************
         // Properties
-        // ****************************************************************
-        public string VehicleType
-        {
-            get { return _type; }
-            set
-            {
-                if (value == "CAR" || value == "Car" || value == "car")
-                {
-                    _type = value.ToLower();
-                }
-
-                else if (value == "BIKE" || value == "Bike" || value == "bike")
-                {
-                    _type = value.ToLower();
-                }
-
-                else if (value == "TRUCK" || value == "Truck" || value == "truck")
-                {
-                    _type = value.ToLower();
-                }
-
-                else
-                {
-                    _type = "invalid vehicle type";
-                }
-            }
-        }
-        public string VehicleSpeedCategory
-        {
-            get { return _speedCategory; }
-            set
-            {
-                if (VehicleSpeed < 65)
-                {
-                    _speedCategory = "slow";
-                }
-
-                else if (VehicleSpeed >= 65 && VehicleSpeed < 90)
-                {
-                    _speedCategory = "average";
-                }
-
-                if (VehicleSpeed >= 90)
-                {
-                    _speedCategory = "fast";
-                }
-            }
-        }
+        // ****************************************************************    
         public int VehicleID { get; set; }
+        public abstract VehicleType VehicleType { get; }
         public int VehicleTeamID { get; set; }
-        public string VehicleMake { get; set; }
-        public string VehicleModel { get; set; }
-        public string VehicleColour { get; set; }
-        public string VehicleYear { get; set; }
-        public int VehicleNumberOfWheels { get; set; }
+        public String VehicleMake { get; set; }
+        public String VehicleModel { get; set; }
+        public String VehicleColour { get; set; }
+        public String VehicleYear { get; set; }
+        public abstract int VehicleNumberOfWheels { get; }
         public int VehicleSpeed { get; set; }
-        public bool VehicleStart { get; private set; }
-        
+        public bool VehicleStart { get; set; } = false;
+        public String VehicleSpeedCategory { get; set; }
+
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Vehicle(int id, int teamID, string make, string model, string colour, string year, string type, int noOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles)
+        public Vehicle(int teamID, String make, String model, String colour, String year, int speed, List<Vehicle> allVehicles)
         {
-            VehicleID = id;
+            VehicleID = allVehicles.Count()+1;
             VehicleTeamID = teamID;
             VehicleMake = make;
             VehicleModel = model;
             VehicleColour = colour;
             VehicleYear = year;
-            VehicleType = type;
-            VehicleNumberOfWheels = noOfWheels;
             VehicleSpeed = speed;
-            VehicleSpeedCategory = speedCategory;
-            VehicleStart = vehicleStart;
+            VehicleSpeedCategory = CalculateSpeedCategory(speed);
 
             allVehicles.Add(this);
         }
@@ -97,6 +45,33 @@ namespace Race.Classes.Vehicles
         // ****************************************************************
         // Methods
         // ****************************************************************
+        public String CalculateSpeedCategory(int speed)
+        {
+            String category;
+
+            while (true)
+            {
+                if (speed < 65)
+                {
+                    category = "slow";
+                    return category;
+                }
+
+                else if (speed >= 65 && speed < 90)
+                {
+                    category = "average";
+                    return category;
+                }
+
+                if (speed >= 90)
+                {
+                    category = "fast";
+                    return category;
+                }
+            }
+        }
+
+
         public virtual void Start()
         {
             VehicleStart = true;

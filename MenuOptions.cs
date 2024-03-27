@@ -24,7 +24,7 @@ namespace Race
         Add_Circuit,
         Show_all_results,
         HEADING_Team_Admin,
-        IGNORE_Add_vehicle,
+        Add_vehicle,
         IGNORE_Edit_vehicle,
         IGNORE_Remove_vehicle,
 
