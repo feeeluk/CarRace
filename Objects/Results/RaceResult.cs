@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Race.Classes.Results
+﻿namespace Race.Objects.Results
 {
     public class RaceResult
     {
@@ -10,7 +7,7 @@ namespace Race.Classes.Results
         // ****************************************************************
         public int ResultID { get; set; }
         public int VehicleID { get; set; }
-        public string VehicleType { get; set; }
+        public VehicleType VehicleType { get; set; }
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }
         public int CircuitID { get; set; }
@@ -20,13 +17,13 @@ namespace Race.Classes.Results
         public int Points { get; set; }
         public bool Winner { get; set; }
         public bool Podium { get; set; }
-        public DateTime ResultDate {  get; set; }
+        public DateTime ResultDate { get; set; }
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public RaceResult(int id, DateTime resultDate, int vehicle, string type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
+        public RaceResult(int id, DateTime resultDate, int vehicle, VehicleType type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
         {
             ResultID = id;
             ResultDate = resultDate;

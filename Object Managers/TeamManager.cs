@@ -1,5 +1,5 @@
-﻿using Race.Classes.Teams;
-using Race.Classes.Vehicles;
+﻿using Race.Classes.Vehicles;
+using Race.Objects.Teams;
 
 namespace Race.Classes.Managers
 {
@@ -45,7 +45,7 @@ namespace Race.Classes.Managers
         }
 
 
-        public void ShowVehiclesInEachTeam()
+        public void ShowVehiclesInEachTeam(List<Vehicle> allVehicles)
         {
             Console.WriteLine($"   Vehicles per team:");
             Console.WriteLine($"   =================");
@@ -54,10 +54,12 @@ namespace Race.Classes.Managers
             {
                 Console.WriteLine($"   - {team.Name}");
 
-                foreach (Vehicle vehicle in team.VehiclesInTeam)
+                foreach (Vehicle vehicle in allVehicles)
                 {
-                    Console.WriteLine($"    * Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType.ToUpper()}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
-
+                    if (team.ID == vehicle.VehicleTeamID)
+                    {
+                        Console.WriteLine($"    * Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
+                    }
                 }
 
                 Console.WriteLine();

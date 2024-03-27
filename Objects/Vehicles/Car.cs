@@ -1,31 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Race.Classes.Vehicles
+﻿namespace Race.Classes.Vehicles
 {
     public class Car : Vehicle
     {
         // ****************************************************************
-        // Fields
-        // ****************************************************************
-
-
-        // ****************************************************************
         // Properties
-        // ****************************************************************  
+        // ****************************************************************
+        public sealed override int VehicleNumberOfWheels => 4;
+        public sealed override VehicleType VehicleType => VehicleType.Car;
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Car(int id, int teamID, string make, string model, string colour, string year, string type, int numberOfWheels, int speed, string speedCategory, bool vehicleStart, List<Vehicle> allVehicles, List<Vehicle> unassignedVehicles) : base(id, teamID, make, model, colour, year, type, numberOfWheels, speed, speedCategory, vehicleStart, allVehicles, unassignedVehicles)
+        public Car(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
+            : base(teamID, make, model, colour, year, speed, allVehicles)
         {
         }
-
-
-        // ****************************************************************
-        // Methods
-        // ****************************************************************
-
     }
 }

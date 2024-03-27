@@ -1,7 +1,7 @@
-﻿using Race.Classes.Circuits;
-using Race.Classes.Managers;
-using Race.Classes.Teams;
+﻿using Race.Classes.Managers;
 using Race.Classes.Vehicles;
+using Race.Objects.Circuits;
+using Race.Objects.Teams;
 using Race.Users;
 
 namespace Race
@@ -42,40 +42,40 @@ namespace Race
             ResultManagerObj = new ResultManager();
 
 
-            // Initialize some test vehicles
-            Vehicle vehicle1 = new Car(1, 1, "Ford", "Focus", "Black", "2013", "CAR", 4, 86, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle2 = new Car(2, 1, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle3 = new Car(3, 1, "Audi", "A5", "Grey", "2012", "car", 4, 110, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle4 = new Car(4, 2, "Toyota", "Corolla", "Black", "2023", "CAR", 4, 92, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle5 = new Car(5, 2, "Fiat", "500", "Black", "2013", "CAR", 4, 86, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle6 = new Car(6, 2, "Renault", "Clio", "White", "2024", "car", 4, 79, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle7 = new Car(7, 3, "Honda", "Civic", "Black", "2013", "CAR", 4, 86, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle8 = new Car(8, 3, "Seat", "Ibiza", "White", "2024", "car", 4, 79, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle9 = new Car(9, 3, "BMW", "320", "Black", "2013", "CAR", 4, 86, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle10 = new Car(10, 4, "Volvo", "V40", "White", "2024", "car", 4, 79, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle11 = new Bike(11, 4, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle12 = new Bike(12, 4,"Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle13 = new Bike(13, 5, "Specialized", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle14 = new Bike(14, 5, "Giant", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle15 = new Bike(15, 5, "Planet X", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle16 = new Bike(16, 6, "Marin", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle17 = new Bike(17, 6, "Canyon", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle18 = new Bike(18, 6, "Raleigh", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle19 = new Bike(19, 7, "Boardman", "Strive", "Black", "2015", "BIKE", 2, 27, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle20 = new Bike(20, 7, "Norco", "Nail Trail", "Silver", "2003", "BIKE", 2, 18, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle21 = new Truck(21, 7, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle22 = new Truck(22, 8, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle23 = new Truck(23, 8, "Leyland", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle24 = new Truck(24, 8, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle25 = new Truck(25, 9, "DAF", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle26 = new Truck(26, 9, "Iveco", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle27 = new Truck(27, 9, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle28 = new Truck(28, 10, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle29 = new Truck(29, 10, "Volvo", "FH", "White", "2018", "TRUCK", 10, 71, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
-            Vehicle vehicle30 = new Truck(30, 10, "Scania", "R Series", "White", "2019", "TRUCK", 10, 68, "speed category", false, VehicleManagerObj.AllVehicles, VehicleManagerObj.UnassignedVehicles);
+            // Initialize vehicles
+            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle2 = new Car(1, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle3 = new Car(1, "Audi", "A5", "Grey", "2012", 110, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle4 = new Car(2, "Toyota", "Corolla", "Black", "2023", 92, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle5 = new Car(2, "Fiat", "500", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle6 = new Car(2, "Renault", "Clio", "White", "2024", 79, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle7 = new Car(3, "Honda", "Civic", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle8 = new Car(3, "Seat", "Ibiza", "White", "2024", 79, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle9 = new Car(3, "BMW", "320", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle10 = new Car(4, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle11 = new Bike(4, "Canyon", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle12 = new Bike(4, "Marin", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle13 = new Bike(5, "Specialized", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle14 = new Bike(5, "Giant", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle15 = new Bike(5, "Planet X", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle16 = new Bike(6, "Marin", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle17 = new Bike(6, "Canyon", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle18 = new Bike(6, "Raleigh", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle19 = new Bike(7, "Boardman", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle20 = new Bike(7, "Norco", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle21 = new Truck(7, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle22 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle23 = new Truck(8, "Leyland", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle24 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle25 = new Truck(9, "DAF", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle26 = new Truck(9, "Iveco", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle27 = new Truck(9, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle28 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle29 = new Truck(10, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle30 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
 
 
-            // Initialize some test teams
+            // Initialize teams
             Team team1 = new Team(1, "Ferarri", TeamManagerObj.Teams);
             Team team2 = new Team(2, "McLaren", TeamManagerObj.Teams);
             Team team3 = new Team(3, "Mercedes", TeamManagerObj.Teams);
@@ -88,40 +88,7 @@ namespace Race
             Team team10 = new Team(10, "Haas", TeamManagerObj.Teams);
 
 
-            // put cars in teams
-            team1.VehiclesInTeam.Add(vehicle1);
-            team1.VehiclesInTeam.Add(vehicle2);
-            team1.VehiclesInTeam.Add(vehicle3);
-            team2.VehiclesInTeam.Add(vehicle4);
-            team2.VehiclesInTeam.Add(vehicle5);
-            team2.VehiclesInTeam.Add(vehicle6);
-            team3.VehiclesInTeam.Add(vehicle7);
-            team3.VehiclesInTeam.Add(vehicle8);
-            team3.VehiclesInTeam.Add(vehicle9);
-            team4.VehiclesInTeam.Add(vehicle10);
-            team4.VehiclesInTeam.Add(vehicle11);
-            team4.VehiclesInTeam.Add(vehicle12);
-            team5.VehiclesInTeam.Add(vehicle13);
-            team5.VehiclesInTeam.Add(vehicle14);
-            team5.VehiclesInTeam.Add(vehicle15);
-            team6.VehiclesInTeam.Add(vehicle16);
-            team6.VehiclesInTeam.Add(vehicle17);
-            team6.VehiclesInTeam.Add(vehicle18);
-            team7.VehiclesInTeam.Add(vehicle19);
-            team7.VehiclesInTeam.Add(vehicle20);
-            team7.VehiclesInTeam.Add(vehicle21);
-            team8.VehiclesInTeam.Add(vehicle22);
-            team8.VehiclesInTeam.Add(vehicle23);
-            team8.VehiclesInTeam.Add(vehicle24);
-            team9.VehiclesInTeam.Add(vehicle25);
-            team9.VehiclesInTeam.Add(vehicle26);
-            team9.VehiclesInTeam.Add(vehicle27);
-            team10.VehiclesInTeam.Add(vehicle28);
-            team10.VehiclesInTeam.Add(vehicle29);
-            team10.VehiclesInTeam.Add(vehicle30);
-
-
-            // Initialize some circuits
+            // Initialize circuits
             Circuit circuit1 = new Circuit(1, "Bahrain", 57, 5.4, CircuitManagerObj.Circuits);
             Circuit circuit2 = new Circuit(2, "Saudi Arabian", 50, 6.2, CircuitManagerObj.Circuits);
             Circuit circuit3 = new Circuit(3, "Australian", 58, 5.2, CircuitManagerObj.Circuits);
@@ -163,7 +130,7 @@ namespace Race
                 switch (userInput)
                 {
                     case 1:
-                        RaceDirectorObj.StartGrandPrix(ResultManagerObj, TeamManagerObj.Teams, CircuitManagerObj.Circuits, ResultManagerObj.SeasonResults);
+                        RaceDirectorObj.StartGrandPrix(ResultManagerObj, VehicleManagerObj.AllVehicles, TeamManagerObj.Teams, CircuitManagerObj.Circuits, ResultManagerObj.SeasonResults);
                         break;
 
                     case 2:
@@ -182,7 +149,7 @@ namespace Race
                         break;
 
                     case 4:
-                        TeamManagerObj.ShowVehiclesInEachTeam();
+                        TeamManagerObj.ShowVehiclesInEachTeam(VehicleManagerObj.AllVehicles);
                         break;
 
                     case 5:
@@ -201,10 +168,14 @@ namespace Race
                     case 8:
                         ResultManagerObj.ShowSeasonResults();
                         break;
+
+                    case 9:
+                        VehicleManagerObj.AddVehicle(TeamManagerObj.Teams, VehicleManagerObj.AllVehicles);
+                        break;
                 }
             }
 
-            while (userInput != 9 );
+            while (userInput != 10);
         }       
     }
 }

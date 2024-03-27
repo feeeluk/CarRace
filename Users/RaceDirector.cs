@@ -1,8 +1,8 @@
-﻿using Race.Classes.Circuits;
-using Race.Classes.Managers;
-using Race.Classes.Results;
-using Race.Classes.Teams;
+﻿using Race.Classes.Managers;
 using Race.Classes.Vehicles;
+using Race.Objects.Circuits;
+using Race.Objects.Results;
+using Race.Objects.Teams;
 
 namespace Race.Users
 {
@@ -18,12 +18,12 @@ namespace Race.Users
         // ****************************************************************
         // Methods
         // ****************************************************************
-        public void StartGrandPrix(ResultManager resultsManagerObj, List<Team> teams, List<Circuit> circuits, List<RaceResult> seasonResults)
+        public void StartGrandPrix(ResultManager resultsManagerObj, List<Vehicle> vehicles, List<Team> teams, List<Circuit> circuits, List<RaceResult> seasonResults)
         {
-            int x = 0;
-
             Console.WriteLine($"  Start race");
             Console.WriteLine($"  ==========");
+
+            int x = 0;
 
             while (x == 0)
             {
@@ -55,7 +55,7 @@ namespace Race.Users
                 }
 
                 StartRace(CircuitChoice);
-                StopRace(resultsManagerObj, CircuitChoice, teams, seasonResults);
+                StopRace(resultsManagerObj, CircuitChoice, teams, seasonResults, vehicles);
 
 
                 Circuit AskUserToChooseCircuit()
@@ -109,13 +109,9 @@ namespace Race.Users
                     {
                         Console.WriteLine($"  Starting Vehicles:");
 
-                        foreach (Team team in teams)
+                        foreach (Vehicle vehicle in vehicles)
                         {
-
-                            foreach (Vehicle vehicle in team.VehiclesInTeam)
-                            {
-                                vehicle.Start();
-                            }
+                            vehicle.Start();                          
                         }
 
                         Console.WriteLine();
@@ -136,7 +132,7 @@ namespace Race.Users
                 }
 
 
-                void StopRace(ResultManager resultsMangerObj, Circuit circuitChoice, List<Team> teams, List<RaceResult> seasonResults)
+                void StopRace(ResultManager resultsMangerObj, Circuit circuitChoice, List<Team> teams, List<RaceResult> seasonResults, List<Vehicle> vehicles)
                 {
                     Console.WriteLine($"  The race is ending...");
                     Console.WriteLine();
@@ -145,7 +141,7 @@ namespace Race.Users
                     StopAllVehicles();
                     Thread.Sleep(1000);
 
-                    resultsManagerObj.RaceResults(teams, circuitChoice, seasonResults);
+                    resultsManagerObj.RaceResults(teams, circuitChoice, seasonResults, vehicles);
                     Thread.Sleep(1000);
 
                     Console.WriteLine($"  The Grand Prix has ended!");
@@ -157,13 +153,9 @@ namespace Race.Users
                     {
                         Console.WriteLine($"  Stopping Vehicles:");
 
-                        foreach (Team team in teams)
+                        foreach (Vehicle vehicle in vehicles)
                         {
-
-                            foreach (Vehicle vehicle in team.VehiclesInTeam)
-                            {
-                                vehicle.Stop();
-                            }
+                            vehicle.Stop();
                         }
 
                         Console.WriteLine();

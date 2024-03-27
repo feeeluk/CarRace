@@ -1,4 +1,4 @@
-﻿using Race.Classes.Circuits;
+﻿using Race.Objects.Circuits;
 
 namespace Race.Classes.Managers
 {

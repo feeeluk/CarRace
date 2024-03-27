@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Race.Classes.Vehicles;
-
-namespace Race.Classes.Teams
+﻿using Race.Classes.Vehicles;
+namespace Race.Objects.Teams
 {
     public class Team
     {
-        // ****************************************************************
-        // Fields
-        // ****************************************************************        
-
-
         // ****************************************************************
         // Properties
         // ****************************************************************
         public int ID { get; set; }
         public string Name { get; set; }
         public List<Vehicle> VehiclesInTeam { get; set; } = new List<Vehicle>();
+
 
         // ****************************************************************
         // Constructor
@@ -27,10 +20,5 @@ namespace Race.Classes.Teams
             Name = name;
             teams.Add(this);
         }
-
-
-        // ****************************************************************
-        // Methods
-        // ****************************************************************
     }
 }

@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using Race.Classes.Circuits;
-using Race.Classes.Managers;
-using Race.Classes.Results;
-using Race.Classes.Teams;
-using Race.Classes.Vehicles;
-
-namespace Race.Classes.Circuits
+﻿namespace Race.Objects.Circuits
 {
     public class Circuit
     {
