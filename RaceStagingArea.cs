@@ -59,16 +59,16 @@ namespace Race
 
 
             // Initialize vehicles
-            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle2 = new Car(1, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle3 = new Car(1, "Audi", "A5", "Grey", "2012", 110, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle4 = new Car(2, "Toyota", "Corolla", "Black", "2023", 92, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle5 = new Car(2, "Fiat", "500", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle6 = new Car(2, "Renault", "Clio", "White", "2024", 79, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle7 = new Car(3, "Honda", "Civic", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle8 = new Car(3, "Seat", "Ibiza", "White", "2024", 79, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle9 = new Car(3, "BMW", "320", "Black", "2013", 86, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle10 = new Car(4, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle2 = new Car(1, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle3 = new Car(1, "Audi", "A5", "Grey", "2012", 110, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle4 = new Car(2, "Toyota", "Corolla", "Black", "2023", 92, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle5 = new Car(2, "Fiat", "500", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle6 = new Car(2, "Renault", "Clio", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle7 = new Car(3, "Honda", "Civic", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle8 = new Car(3, "Seat", "Ibiza", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle9 = new Car(3, "BMW", "320", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle10 = new Car(4, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
             Vehicle vehicle11 = new Bike(4, "Canyon", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
             Vehicle vehicle12 = new Bike(4, "Marin", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
             Vehicle vehicle13 = new Bike(5, "Specialized", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
@@ -79,16 +79,16 @@ namespace Race
             Vehicle vehicle18 = new Bike(6, "Raleigh", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
             Vehicle vehicle19 = new Bike(7, "Boardman", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
             Vehicle vehicle20 = new Bike(7, "Norco", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle21 = new Truck(7, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle22 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle23 = new Truck(8, "Leyland", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle24 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle25 = new Truck(9, "DAF", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle26 = new Truck(9, "Iveco", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle27 = new Truck(9, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle28 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle29 = new Truck(10, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles);
-            Vehicle vehicle30 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles);
+            Vehicle vehicle21 = new Truck(7, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle22 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle23 = new Truck(8, "Leyland", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle24 = new Truck(8, "Scania", "R Series", "White", "2019", 68, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle25 = new Truck(9, "DAF", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle26 = new Truck(9, "Iveco", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle27 = new Truck(9, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle28 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle29 = new Truck(10, "Volvo", "FH", "White", "2018", 71, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle30 = new Truck(10, "Scania", "R Series", "White", "2017", 68, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
 
 
             // Initialize teams
@@ -194,7 +194,7 @@ namespace Race
                         break;
 
                     case 11:
-                        VehicleManagerObj.AddVehicle(TeamManagerObj.Teams, VehicleManagerObj.AllVehicles, EngineManagerObj.Engines, FuelTankManagerObj.FuelTanks, MotorisedVehicleManagerObj.MotorisedVehicles);
+                        VehicleManagerObj.AddVehicle(TeamManagerObj.Teams, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines, FuelTankManagerObj.FuelTanks);
                         break;
                 }
             }

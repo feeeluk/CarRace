@@ -8,7 +8,7 @@ namespace Race.Objects.Teams
         // ****************************************************************
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<Vehicle> VehiclesInTeam { get; set; } = new List<Vehicle>();
+        //public List<Vehicle> VehiclesInTeam { get; set; } = new List<Vehicle>();
 
 
         // ****************************************************************

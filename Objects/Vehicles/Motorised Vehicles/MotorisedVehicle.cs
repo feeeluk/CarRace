@@ -13,12 +13,12 @@ public abstract class MotorisedVehicle : Vehicle
     // *******************************************************
     // CONSTRUCTOR
     // *******************************************************
-    public MotorisedVehicle(List<Vehicle> vehicles, int teamID, String make, String model, String colour, String year, int speed)
+    public MotorisedVehicle(List<Vehicle> vehicles, int teamID, String make, String model, String colour, String year, int speed, List<MotorisedVehicle> motorisedVehicles, Engine engine, FuelTank fuelTank)
         : base(vehicles, teamID, make, model, colour, year, speed)
     {
-        //MotorisedVehicleEngine = engine;
-        //MotorisedVehicleFuelTank = fuelTank;
-        //motorisedVehicles.Add(this);
+        MotorisedVehicleEngine = engine;
+        MotorisedVehicleFuelTank = fuelTank;
+        motorisedVehicles.Add(this);
     }
 
 

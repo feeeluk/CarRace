@@ -5,7 +5,6 @@
         // *******************************************************
         // PROPERTIES
         // *******************************************************
-        List<Engine> Engines { get; set; } = new List<Engine>();
         public int EngineID { get; set; }
         public String EngineName { get; set; }
         public String EngineFuelType { get; set; }
@@ -19,7 +18,7 @@
             EngineID = engines.Count();
             EngineName = name;
             EngineFuelType = engineFuelType;
-            Engines.Add(this);
+            engines.Add(this);
         }
     }
 }

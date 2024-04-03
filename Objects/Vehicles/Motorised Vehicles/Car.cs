@@ -1,4 +1,6 @@
-﻿namespace Race.Objects.Vehicles
+﻿using System.Collections.Generic;
+
+namespace Race.Objects.Vehicles
 {
     public class Car : MotorisedVehicle
     {
@@ -13,8 +15,8 @@
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Car(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
-            : base(allVehicles,teamID, make, model, colour, year, speed)
+        public Car(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles, List<MotorisedVehicle> motorisedVehicles, Engine engine, FuelTank fuelTank)
+            : base(allVehicles,teamID, make, model, colour, year, speed, motorisedVehicles, engine, fuelTank)
         {
         }
 

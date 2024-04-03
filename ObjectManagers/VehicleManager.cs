@@ -57,7 +57,7 @@ namespace Race.ObjectsManagers
         }
 
 
-        public void AddVehicle(List<Team> teams, List<Vehicle> allVehicles)
+        public void AddVehicle(List<Team> teams, List<Vehicle> allVehicles, List<MotorisedVehicle> motorisedVehicles, List<Engine> engines, List<FuelTank> fuelTanks)
         {
             Console.WriteLine($"  Add a Vehicle to a team");
             Console.WriteLine($"  =======================");
@@ -86,26 +86,26 @@ namespace Race.ObjectsManagers
 
                         int getNewVehicleType = Convert.ToInt32(Console.ReadLine());
 
-                        //int ii = 0;
-                        //Console.WriteLine($"  Which engine?");
-                        //foreach (Engine e in engines)
-                        //{
-                        //    Console.WriteLine($"  {e} ({ii + 1})");
-                        //    ii++;
-                        //}
+                        int ii = 0;
+                        Console.WriteLine($"  Which engine?");
+                        foreach (Engine e in engines)
+                        {
+                            Console.WriteLine($"  {e.EngineName} ({ii + 1})");
+                            ii++;
+                        }
 
-                        //int getEngine = Convert.ToInt32(Console.ReadLine());
+                        int getEngine = Convert.ToInt32(Console.ReadLine());
 
 
-                        //int iii = 0;
-                        //Console.WriteLine($"  Which fuel tank?");
-                        //foreach (FuelTank fk in fuelTanks)
-                        //{
-                        //    Console.WriteLine($"  {fk} ({iii + 1})");
-                        //    iii++;
-                        //}
+                        int iii = 0;
+                        Console.WriteLine($"  Which fuel tank?");
+                        foreach (FuelTank fk in fuelTanks)
+                        {
+                            Console.WriteLine($"  {fk.FuelTankName} ({iii + 1})");
+                            iii++;
+                        }
 
-                        //int getFuelTank = Convert.ToInt32(Console.ReadLine());
+                        int getFuelTank = Convert.ToInt32(Console.ReadLine());
 
                         Console.Write($"  What is the make?");
                         String getNewVehicleMake = Console.ReadLine();
@@ -121,8 +121,8 @@ namespace Race.ObjectsManagers
 
                         Console.Write($"  What is it's speed?");
                         int getNewVehicleSpeed = Convert.ToInt32(Console.ReadLine());
-                        // Engine newVehicleEngine = engines.ElementAt(ii-1);
-                        // FuelTank newVehicleFuelTank = fuelTanks.ElementAt(iii-1);
+                        Engine newVehicleEngine = engines.ElementAt(ii-1);
+                        FuelTank newVehicleFuelTank = fuelTanks.ElementAt(iii-1);
                         int newVehicleTeamID = 1 + TeamChoiceInt;
                         int newVehicleType = getNewVehicleType;
                         String newVehicleMake = getNewVehicleMake;
@@ -133,7 +133,7 @@ namespace Race.ObjectsManagers
 
                         if (newVehicleType == 1)
                         {
-                            Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
+                            Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW CAR ADDED TO TEAM");
                             
@@ -150,7 +150,7 @@ namespace Race.ObjectsManagers
 
                         else if (newVehicleType == 3)
                         {
-                            Vehicle vehicle1 = new Truck(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
+                            Vehicle vehicle1 = new Truck(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW TRUCK ADDED TO TEAM");
                             Thread.Sleep(500);
