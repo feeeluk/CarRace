@@ -1,6 +1,7 @@
-﻿using Race.Classes.Managers;
-using Race.Classes.Vehicles;
+﻿using Race.ObjectsManagers;
+using Race.Objects.Vehicles;
 using Race.Objects.Circuits;
+using Race.Objects.Menus;
 using Race.Objects.Teams;
 using Race.Users;
 
@@ -17,6 +18,9 @@ namespace Race
         TeamManager TeamManagerObj { get; set; }
         CircuitManager CircuitManagerObj { get; set; }
         ResultManager ResultManagerObj { get; set; }
+        MotorisedVehicleManager MotorisedVehicleManagerObj {  get; set; }
+        EngineManager EngineManagerObj { get; set; }
+        FuelTankManager FuelTankManagerObj { get; set; }
 
 
         // ****************************************************************
@@ -40,6 +44,18 @@ namespace Race
             TeamManagerObj = new TeamManager();
             CircuitManagerObj = new CircuitManager();            
             ResultManagerObj = new ResultManager();
+            MotorisedVehicleManagerObj = new MotorisedVehicleManager();
+            EngineManagerObj = new EngineManager();
+            FuelTankManagerObj = new FuelTankManager();
+
+            // Initialize Engines
+            Engine engine1 = new Engine(EngineManagerObj.Engines, "Large", "Diesel");
+            Engine engine2 = new Engine(EngineManagerObj.Engines, "Small", "Petrol");
+
+
+            // Initialize fuel tanks
+            FuelTank fuelTank1 = new FuelTank(FuelTankManagerObj.FuelTanks, "Large", 100);
+            FuelTank fuelTank2 = new FuelTank(FuelTankManagerObj.FuelTanks, "Small", 50);
 
 
             // Initialize vehicles
@@ -170,12 +186,20 @@ namespace Race
                         break;
 
                     case 9:
-                        VehicleManagerObj.AddVehicle(TeamManagerObj.Teams, VehicleManagerObj.AllVehicles);
+                        ResultManagerObj.ShowVehicleLeaderboard();
+                        break;
+
+                    case 10:
+                        ResultManagerObj.ShowConstructorLeaderboard();
+                        break;
+
+                    case 11:
+                        VehicleManagerObj.AddVehicle(TeamManagerObj.Teams, VehicleManagerObj.AllVehicles, EngineManagerObj.Engines, FuelTankManagerObj.FuelTanks, MotorisedVehicleManagerObj.MotorisedVehicles);
                         break;
                 }
             }
 
-            while (userInput != 10);
+            while (userInput != 12);
         }       
     }
 }

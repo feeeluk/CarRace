@@ -1,24 +1,26 @@
 ﻿using Race.Objects.Vehicles;
-namespace Race.Objects.Teams
+
+namespace Race.ObjectsManagers
 {
-    public class Team
+    public class EngineManager
     {
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public List<Vehicle> VehiclesInTeam { get; set; } = new List<Vehicle>();
+        public List<Engine> Engines { get; set; }
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Team(int id, string name, List<Team> teams)
+        public EngineManager()
         {
-            ID = id;
-            Name = name;
-            teams.Add(this);
+            Engines = new List<Engine>();
         }
+
+        // ****************************************************************
+        // Methods
+        // ****************************************************************
+
     }
 }

@@ -1,5 +1,5 @@
-﻿using Race.Classes.Managers;
-using Race.Classes.Vehicles;
+﻿using Race.ObjectsManagers;
+using Race.Objects.Vehicles;
 using Race.Objects.Circuits;
 using Race.Objects.Results;
 using Race.Objects.Teams;

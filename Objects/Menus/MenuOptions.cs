@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Race
+namespace Race.Objects.Menus
 {
     enum MenuOptions
     {
@@ -23,6 +23,8 @@ namespace Race
         List_all_Circuits,
         Add_Circuit,
         Show_all_results,
+        Show_Vehicle_leaderboard,
+        Show_Constructor_leaderboard,
         HEADING_Team_Admin,
         Add_vehicle,
         IGNORE_Edit_vehicle,

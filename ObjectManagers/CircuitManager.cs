@@ -1,6 +1,6 @@
 ﻿using Race.Objects.Circuits;
 
-namespace Race.Classes.Managers
+namespace Race.ObjectsManagers
 {
     public class CircuitManager
     {

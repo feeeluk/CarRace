@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Race
+﻿namespace Race.Objects.Menus
 {
     public class Menu
     {

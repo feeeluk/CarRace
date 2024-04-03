@@ -1,4 +1,6 @@
-﻿namespace Race.Classes.Vehicles
+﻿using Race.Objects;
+
+namespace Race.Objects.Vehicles
 {
     public abstract class Vehicle
     {
@@ -11,23 +13,25 @@
         // ****************************************************************
         // Properties
         // ****************************************************************    
-        public int VehicleID { get; set; }
         public abstract VehicleType VehicleType { get; }
+        public abstract int VehicleNumberOfWheels { get; }
+        public int VehicleID { get; set; }
         public int VehicleTeamID { get; set; }
         public String VehicleMake { get; set; }
         public String VehicleModel { get; set; }
         public String VehicleColour { get; set; }
         public String VehicleYear { get; set; }
-        public abstract int VehicleNumberOfWheels { get; }
         public int VehicleSpeed { get; set; }
-        public bool VehicleStart { get; set; } = false;
+        public bool VehicleStarted { get; set; } = false;
         public String VehicleSpeedCategory { get; set; }
+        public abstract int ServiceInterval { get; }
+        public virtual bool IsMotorisedVehicle { get; } = false;
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Vehicle(int teamID, String make, String model, String colour, String year, int speed, List<Vehicle> allVehicles)
+        public Vehicle(List<Vehicle> allVehicles, int teamID, String make, String model, String colour, String year, int speed)
         {
             VehicleID = allVehicles.Count()+1;
             VehicleTeamID = teamID;
@@ -72,16 +76,16 @@
         }
 
 
-        public virtual void Start()
+        public void Start()
         {
-            VehicleStart = true;
+            VehicleStarted = true;
             Console.WriteLine($"  - Vehicle #{VehicleID} - ({VehicleType}) has started moving");
         }
 
 
-        public virtual void Stop()
+        public void Stop()
         {
-            VehicleStart = false;
+            VehicleStarted = false;
             Console.WriteLine($"  - Vehicle #{VehicleID} - ({VehicleType}) has stopped moving");
         }
 
@@ -92,5 +96,11 @@
         }
 
 
+        public abstract void ServiceVehicle();
+
+        public virtual void DNF()
+        {
+            Console.WriteLine($"The vehicle crashed");
+        }
     }
 }

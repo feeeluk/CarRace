@@ -1,8 +1,8 @@
-﻿using Race.Classes.Vehicles;
+﻿using Race.Objects.Vehicles;
+using Race.Objects;
 using Race.Objects.Teams;
-using System.Runtime.Serialization;
 
-namespace Race.Classes.Managers
+namespace Race.ObjectsManagers
 {
     public class VehicleManager
     {
@@ -36,15 +36,21 @@ namespace Race.Classes.Managers
 
         public void ShowAllVehicles()
         {
-            int number = 1;
-
             Console.WriteLine($"   All Vehicles:");
             Console.WriteLine($"   ==============");
 
-            foreach (Vehicle vehicle in AllVehicles)
+            foreach (Vehicle v in AllVehicles)
             {
-                Console.WriteLine($"    - Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
-                number++;
+                if (v.IsMotorisedVehicle == true)
+                {
+                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, {v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, {v.VehicleSpeedCategory.ToUpper()}, Has an engine.");
+
+                }
+
+                else
+                {
+                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, {v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, {v.VehicleSpeedCategory.ToUpper()}");
+                }
             }
 
             Console.WriteLine();
@@ -71,7 +77,6 @@ namespace Race.Classes.Managers
                     case "Y":
                         
                         int i = 0;
-
                         Console.WriteLine($"  What type of vehicle is it?");
                         foreach (var v in Enum.GetNames(typeof(VehicleType)))
                         {
@@ -80,6 +85,27 @@ namespace Race.Classes.Managers
                         }
 
                         int getNewVehicleType = Convert.ToInt32(Console.ReadLine());
+
+                        //int ii = 0;
+                        //Console.WriteLine($"  Which engine?");
+                        //foreach (Engine e in engines)
+                        //{
+                        //    Console.WriteLine($"  {e} ({ii + 1})");
+                        //    ii++;
+                        //}
+
+                        //int getEngine = Convert.ToInt32(Console.ReadLine());
+
+
+                        //int iii = 0;
+                        //Console.WriteLine($"  Which fuel tank?");
+                        //foreach (FuelTank fk in fuelTanks)
+                        //{
+                        //    Console.WriteLine($"  {fk} ({iii + 1})");
+                        //    iii++;
+                        //}
+
+                        //int getFuelTank = Convert.ToInt32(Console.ReadLine());
 
                         Console.Write($"  What is the make?");
                         String getNewVehicleMake = Console.ReadLine();
@@ -95,7 +121,8 @@ namespace Race.Classes.Managers
 
                         Console.Write($"  What is it's speed?");
                         int getNewVehicleSpeed = Convert.ToInt32(Console.ReadLine());
-
+                        // Engine newVehicleEngine = engines.ElementAt(ii-1);
+                        // FuelTank newVehicleFuelTank = fuelTanks.ElementAt(iii-1);
                         int newVehicleTeamID = 1 + TeamChoiceInt;
                         int newVehicleType = getNewVehicleType;
                         String newVehicleMake = getNewVehicleMake;
@@ -109,6 +136,7 @@ namespace Race.Classes.Managers
                             Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW CAR ADDED TO TEAM");
+                            
                             Thread.Sleep(500);
                         }
 

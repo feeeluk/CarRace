@@ -1,9 +1,10 @@
-﻿using Race.Classes.Vehicles;
+﻿using Race.Objects.Vehicles;
 using Race.Objects.Circuits;
 using Race.Objects.Results;
 using Race.Objects.Teams;
+using Race.Objects;
 
-namespace Race.Classes.Managers
+namespace Race.ObjectsManagers
 {
     public class ResultManager
     {
@@ -238,7 +239,7 @@ namespace Race.Classes.Managers
             {
                 foreach (var result in group)
                 {
-                    Console.WriteLine($"  Day: {result.ResultDate}, Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
+                    Console.WriteLine($"  Day: {result.ResultDate.ToString("yyyy/MM/dd")}, Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
                 }
             }
 
@@ -246,22 +247,59 @@ namespace Race.Classes.Managers
         }
 
 
-        public void HowManyRacesHaveThereBeen()
+        public void ShowVehicleLeaderboard()
         {
-            var distinctVehicles = SeasonResults.GroupBy(x => x.VehicleID).Distinct();
-            var countDistinctVehicles = distinctVehicles.Count();
-            
-            var distinctRaceDates = SeasonResults.GroupBy(x => x.ResultDate).Distinct();
-            var countDistinctRaceDates = distinctRaceDates.Count();
-            
-            if (countDistinctVehicles != 0 || countDistinctRaceDates != 0)
+            Console.WriteLine($"  Vehicle Leaderboard");
+            Console.WriteLine($"  ===================");
+
+            var query = (from s in SeasonResults
+                         group s by new { s.VehicleID }
+                        into grp
+                         select new
+                         {
+                             grp.Key.VehicleID,
+                             TotalPoints = grp.Sum(s => s.Points)
+                         }).ToList();
+
+            foreach (var raceResult in query)
             {
-                Console.WriteLine($"  Races run = {countDistinctVehicles / countDistinctRaceDates}");
+                Console.WriteLine($"  Vehicle:{raceResult.VehicleID},  Total points:{raceResult.TotalPoints}"); 
             }
-            else
+
+            Console.WriteLine();
+        }
+
+
+        public void ShowConstructorLeaderboard()
+        {
+            Console.WriteLine($"  Constructor Leaderboard");
+            Console.WriteLine($"  =======================");
+
+            var query = (from s in SeasonResults
+                         group s by new { s.TeamID}
+                        into grp
+                         select new
+                         {
+                             grp.Key.TeamID,
+                             TotalPoints = grp.Sum(s => s.Points)
+                         }).ToList();
+
+            foreach (var raceResult in query)
             {
-                Console.WriteLine($"  Races run = {0}"); 
+                Console.WriteLine($"  Team:{raceResult.TeamID},  Total points:{raceResult.TotalPoints}");
             }
+
+            Console.WriteLine();
+        }
+
+
+        public void HowManyRacesHaveThereBeen()
+        {            
+            List<String> distinctRaces = SeasonResults.Select(x => x.ResultDate.ToString("dd:HH:mm:ss")).Distinct().ToList();
+            int countDistinctRaces = distinctRaces.Count();
+            
+            Console.WriteLine($"  Races run = {countDistinctRaces}");
+
         }
     }
 }

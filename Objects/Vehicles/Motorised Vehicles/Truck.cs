@@ -1,19 +1,19 @@
 ﻿namespace Race.Objects.Vehicles
 {
-    public class Bike : Vehicle
+    public class Truck : MotorisedVehicle
     {
         // ****************************************************************
         // Properties
         // ****************************************************************
-        public sealed override int VehicleNumberOfWheels => 2;
-        public sealed override VehicleType VehicleType => VehicleType.Bike;
-        public override int ServiceInterval => 8;
+        public sealed override int VehicleNumberOfWheels => 12;
+        public sealed override VehicleType VehicleType => VehicleType.Truck;
+        public override int ServiceInterval => 5;
 
 
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Bike(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
+        public Truck(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
             : base(allVehicles, teamID, make, model, colour, year, speed)
         {
         }
@@ -24,23 +24,16 @@
         // *******************************************************
         public override void ServiceVehicle()
         {
-            OilChain();
-            PumpUpTyres();
+            ChangeTacograph();
         }
 
 
         // *******************************************************
         // PRIVATE METHODS
         // *******************************************************
-        private void OilChain()
+        private void ChangeTacograph()
         {
-            Console.WriteLine("OilChain");
-        }
-
-
-        private void PumpUpTyres()
-        {
-            Console.WriteLine("Pump up tyres");
+            Console.WriteLine("Change tacograph");
         }
     }
 }

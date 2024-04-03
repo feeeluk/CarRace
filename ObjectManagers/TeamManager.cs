@@ -1,7 +1,7 @@
-﻿using Race.Classes.Vehicles;
+﻿using Race.Objects.Vehicles;
 using Race.Objects.Teams;
 
-namespace Race.Classes.Managers
+namespace Race.ObjectsManagers
 {
     public class TeamManager
     {
