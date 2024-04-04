@@ -10,9 +10,9 @@ namespace Race.ObjectsManagers
         // Properties
         // ****************************************************************
         public List<Vehicle> AllVehicles { get; set; }
-        Team TeamChoice { get; set; }
-        int TeamChoiceInt { get; set; }
-        String ConfirmTeamChoice { get; set; }
+        Team ChosenTeam { get; set; }
+        int teamChoiceInt { get; set; }
+        String IsChoiceCorrect { get; set; }
         
 
 
@@ -34,23 +34,30 @@ namespace Race.ObjectsManagers
         }
 
 
-        public void ShowAllVehicles()
+        public void ShowAllVehicles(List<MotorisedVehicle> motorisedVehicles)
         {
-            Console.WriteLine($"   All Vehicles:");
-            Console.WriteLine($"   ==============");
-
+            Console.WriteLine($"  All Vehicles:");
+            Console.WriteLine($"  ==============");
+            int i = 1;
             foreach (Vehicle v in AllVehicles)
             {
                 if (v.IsMotorisedVehicle == true)
                 {
-                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, {v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, {v.VehicleSpeedCategory.ToUpper()}, Has an engine.");
-
+                    MotorisedVehicle mv = motorisedVehicles.Find(x => x.VehicleID == i);
+                    Console.WriteLine($"    - Vehicle #{mv.VehicleID} - {mv.VehicleType}," +
+                        $"{mv.VehicleMake}, {mv.VehicleModel}, {mv.VehicleColour}, {mv.VehicleYear}, " +
+                        $"{mv.VehicleSpeedCategory}, " +
+                        $"Engine(ID:{mv.MotorisedVehicleEngine.EngineID}, {mv.MotorisedVehicleEngine.EngineName}, {mv.MotorisedVehicleEngine.EngineFuelType}), " +
+                        $"Fuel Tank(ID:{mv.MotorisedVehicleFuelTank.FuelTankID}, {mv.MotorisedVehicleFuelTank.FuelTankName}, {mv.MotorisedVehicleFuelTank.FuelTankSize} ltrs)");
                 }
 
                 else
                 {
-                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, {v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, {v.VehicleSpeedCategory.ToUpper()}");
+                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, " +
+                        $"{v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, " +
+                        $"{v.VehicleSpeedCategory}");
                 }
+                i++;
             }
 
             Console.WriteLine();
@@ -66,97 +73,17 @@ namespace Race.ObjectsManagers
 
             while (x == 0)
             {
-                TeamChoice = AskUserToChooseTeam();
-                ConfirmTeamChoice = ConfirmChoiceOfTeam();
-                
+                ChosenTeam = UserChoosesTeam();
+                IsChoiceCorrect = UserConfirmsChosenTeam();
+
                 Console.WriteLine("");
 
-                switch (ConfirmTeamChoice)
+                switch (IsChoiceCorrect)
                 {
                     case "y":
                     case "Y":
-                        
-                        int i = 0;
-                        Console.WriteLine($"  What type of vehicle is it?");
-                        foreach (var v in Enum.GetNames(typeof(VehicleType)))
-                        {
-                            Console.WriteLine($"  {v} ({i+1})");
-                            i++;
-                        }
 
-                        int getNewVehicleType = Convert.ToInt32(Console.ReadLine());
-
-                        int ii = 0;
-                        Console.WriteLine($"  Which engine?");
-                        foreach (Engine e in engines)
-                        {
-                            Console.WriteLine($"  {e.EngineName} ({ii + 1})");
-                            ii++;
-                        }
-
-                        int getEngine = Convert.ToInt32(Console.ReadLine());
-
-
-                        int iii = 0;
-                        Console.WriteLine($"  Which fuel tank?");
-                        foreach (FuelTank fk in fuelTanks)
-                        {
-                            Console.WriteLine($"  {fk.FuelTankName} ({iii + 1})");
-                            iii++;
-                        }
-
-                        int getFuelTank = Convert.ToInt32(Console.ReadLine());
-
-                        Console.Write($"  What is the make?");
-                        String getNewVehicleMake = Console.ReadLine();
-
-                        Console.Write($"  What is the model?");
-                        String getNewVehicleModel = Console.ReadLine();
-
-                        Console.Write($"  What is it's colour?");
-                        String getNewVehicleColour = Console.ReadLine();
-
-                        Console.Write($"  What year was it made?");
-                        String getNewVehicleYear = Console.ReadLine();
-
-                        Console.Write($"  What is it's speed?");
-                        int getNewVehicleSpeed = Convert.ToInt32(Console.ReadLine());
-                        Engine newVehicleEngine = engines.ElementAt(ii-1);
-                        FuelTank newVehicleFuelTank = fuelTanks.ElementAt(iii-1);
-                        int newVehicleTeamID = 1 + TeamChoiceInt;
-                        int newVehicleType = getNewVehicleType;
-                        String newVehicleMake = getNewVehicleMake;
-                        String newVehicleModel = getNewVehicleModel;
-                        String newVehicleColour = getNewVehicleColour;
-                        String newVehicleYear = getNewVehicleYear;
-                        int newVehicleSpeed = getNewVehicleSpeed;
-
-                        if (newVehicleType == 1)
-                        {
-                            Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
-                            Console.WriteLine();
-                            Console.WriteLine($"  NEW CAR ADDED TO TEAM");
-                            
-                            Thread.Sleep(500);
-                        }
-
-                        else if (newVehicleType == 2)
-                        {
-                            Vehicle vehicle1 = new Bike(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
-                            Console.WriteLine();
-                            Console.WriteLine($"  NEW Bike ADDED TO TEAM");
-                            Thread.Sleep(500);
-                        }
-
-                        else if (newVehicleType == 3)
-                        {
-                            Vehicle vehicle1 = new Truck(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
-                            Console.WriteLine();
-                            Console.WriteLine($"  NEW TRUCK ADDED TO TEAM");
-                            Thread.Sleep(500);
-                        }
-                        
-                        Console.WriteLine();
+                        Add();
 
                         x = 1;
                         break;
@@ -172,39 +99,187 @@ namespace Race.ObjectsManagers
                         return;
 
                     default:
-                        Console.WriteLine("  invalid response, please press 'y', 'n' or 'x'");
+                        Console.WriteLine("  Invalid response! 'y', 'n' or 'x'");
                         Console.WriteLine();
                         continue;
                 }
 
-                Team AskUserToChooseTeam()
+
+                Team UserChoosesTeam()
                 {
-                    TeamChoiceInt = GetChoiceOfTeam();
-                    return DisplayChoiceOfTeam(TeamChoiceInt);
+                    Console.WriteLine($"  Which Team do you want to choose?");
+                    teamChoiceInt = Convert.ToInt32(Console.ReadLine()) - 1;
 
-                    int GetChoiceOfTeam()
-                    {
-                        Console.WriteLine($"  Which Team do you want to choose?");
-                        return Convert.ToInt32(Console.ReadLine()) - 1;
-                    }
-
-                    Team DisplayChoiceOfTeam(int userChoice)
-                    {
-                        Console.WriteLine();
-                        Team choice = teams.ElementAt(userChoice);
-                        Console.WriteLine($"  You have selected: #{choice.ID} - {choice.Name}");
-                        Console.WriteLine();
-                        return choice;
-                    }
+                    return DisplayChosenTeam(teamChoiceInt);
                 }
 
 
-                string ConfirmChoiceOfTeam()
+                Team DisplayChosenTeam(int userChoice)
+                {
+                    Console.WriteLine();
+                    Team choice = teams.ElementAt(userChoice);
+                    Console.WriteLine($"  You have selected: #{choice.ID} - {choice.Name}");
+                    Console.WriteLine();
+                    return choice;
+                }
+
+
+                String UserConfirmsChosenTeam()
                 {
                     Console.WriteLine($"  Is this correct? y(yes) n(no) x(exit)");
                     return Console.ReadLine();
                 }
 
+
+                String WhatMake()
+                {
+                    Console.Write($"  What is the make?");
+                    return Console.ReadLine();
+                }
+
+
+                String WhatModel()
+                {
+                    Console.Write($"  What is the model?");
+                    return Console.ReadLine();
+                }
+
+
+                String WhatColour()
+                {
+                    Console.Write($"  What is it's colour?");
+                    return Console.ReadLine();
+                }
+
+
+                String WhatYear()
+                {
+                    Console.Write($"  What year was it made?");
+                    return Console.ReadLine();
+                }
+
+
+                int WhatSpeed()
+                {
+                    Console.Write($"  What is it's speed?");
+                    return Convert.ToInt32(Console.ReadLine());
+                }
+
+
+                bool IsItMotorised()
+                {
+                    Console.Write($"  Is it motorised? y / n:");
+
+                    String isItMotorised = Console.ReadLine();
+
+                    switch (isItMotorised)
+                    {
+                        case "y":
+                        case "Y":
+                            break;
+
+                        case "n":
+                        case "N":
+                            return false;
+                    }
+
+                    return true;
+                }
+
+
+                int WhichTypeOfVehicle(bool isMotorised)
+                {
+                    List<VehicleType> list = AllVehicles.Where(x => x.IsMotorisedVehicle == isMotorised).Select(x => x.VehicleType).Distinct().ToList();
+                    int i = 1;
+                    Console.WriteLine("  What type of vehicle is it? ");
+                    foreach (VehicleType v in list)
+                    {
+                        Console.WriteLine($"    {v} ({i})");
+                        i++;
+                    }
+
+                    return Convert.ToInt32(Console.ReadLine());
+                }
+                
+                
+                Engine WhichEngine()
+                {
+                    int i = 0;
+                    Console.WriteLine($"  Which engine? ");
+                    foreach (Engine e in engines)
+                    {
+                        Console.WriteLine($"    {e.EngineName} ({i + 1})");
+                        i++;
+                    }
+
+                    int engine = Convert.ToInt32(Console.ReadLine());
+                    return engines.ElementAt(engine - 1);
+                }
+
+
+                FuelTank WhichFuelTank()
+                {
+                    int i = 0;
+                    Console.WriteLine($"  Which fuel tank? ");
+                    foreach (FuelTank fk in fuelTanks)
+                    {
+                        Console.WriteLine($"    {fk.FuelTankName} ({i + 1})");
+                        i++;
+                    }
+
+                    int fuelTank = Convert.ToInt32(Console.ReadLine());
+                    return fuelTanks.ElementAt(fuelTank - 1);
+                }
+
+
+                void Add()
+                {
+                    int newVehicleTeamID = teamChoiceInt + 1;
+                    String newVehicleMake = WhatMake();
+                    String newVehicleModel = WhatModel();
+                    String newVehicleColour = WhatColour();
+                    String newVehicleYear = WhatYear();
+                    int newVehicleSpeed = WhatSpeed();
+                    bool newVehicleIsMotorised = IsItMotorised();
+
+                    if (newVehicleIsMotorised == true)
+                    {
+                        int newVehicleType = WhichTypeOfVehicle(newVehicleIsMotorised);
+
+                        Engine newVehicleEngine = WhichEngine();
+                        FuelTank newVehicleFuelTank = WhichFuelTank();
+
+                        if (newVehicleType == 1)
+                        {
+                            Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
+                            Console.WriteLine();
+                            Console.WriteLine($"  NEW CAR ADDED TO TEAM");
+
+                            Thread.Sleep(500);
+                        }
+
+                        else if (newVehicleType == 2)
+                        {
+                            Vehicle vehicle1 = new Truck(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
+                            Console.WriteLine();
+                            Console.WriteLine($"  NEW TRUCK ADDED TO TEAM");
+                            Thread.Sleep(500);
+                        }
+                    }
+
+                    else
+                    {
+                        int newVehicleType = WhichTypeOfVehicle(newVehicleIsMotorised);
+
+                        if (newVehicleType == 1)
+                        {
+                            Vehicle vehicle1 = new Bike(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
+                            Console.WriteLine();
+                            Console.WriteLine($"  NEW Bike ADDED TO TEAM");
+                            Thread.Sleep(500);
+                        }
+                    }
+                }
             }
             Console.WriteLine("");
         }

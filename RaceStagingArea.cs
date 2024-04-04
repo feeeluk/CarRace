@@ -161,7 +161,7 @@ namespace Race
                         break;
 
                     case 3:
-                        VehicleManagerObj.ShowAllVehicles();                                          
+                        VehicleManagerObj.ShowAllVehicles(MotorisedVehicleManagerObj.MotorisedVehicles);                                          
                         break;
 
                     case 4:
