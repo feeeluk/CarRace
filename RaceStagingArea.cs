@@ -59,16 +59,16 @@ namespace Race
 
 
             // Initialize vehicles
-            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle2 = new Car(1, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle3 = new Car(1, "Audi", "A5", "Grey", "2012", 110, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle4 = new Car(2, "Toyota", "Corolla", "Black", "2023", 92, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle5 = new Car(2, "Fiat", "500", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle6 = new Car(2, "Renault", "Clio", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle7 = new Car(3, "Honda", "Civic", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle8 = new Car(3, "Seat", "Ibiza", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle9 = new Car(3, "BMW", "320", "Black", "2013", 86, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
-            Vehicle vehicle10 = new Car(4, "Volvo", "V40", "White", "2024", 79, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle1 = new Car(1, "Ford", "Focus", "Black", "2013", 84, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle2 = new Car(1, "Volvo", "V40", "White", "2024", 83, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle3 = new Car(1, "Audi", "A5", "Grey", "2012", 85, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle4 = new Car(2, "Toyota", "Corolla", "Black", "2023", 84, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle5 = new Car(2, "Fiat", "500", "Black", "2013", 81, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle6 = new Car(2, "Renault", "Clio", "White", "2024", 82, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle7 = new Car(3, "Honda", "Civic", "Black", "2013", 83, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle8 = new Car(3, "Seat", "Ibiza", "White", "2024", 80, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle9 = new Car(3, "BMW", "320", "Black", "2013", 85, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
+            Vehicle vehicle10 = new Car(4, "Volvo", "V40", "White", "2024", 83, VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles, EngineManagerObj.Engines.ElementAt(0), FuelTankManagerObj.FuelTanks.ElementAt(0));
             Vehicle vehicle11 = new Bike(4, "Canyon", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);
             Vehicle vehicle12 = new Bike(4, "Marin", "Nail Trail", "Silver", "2003", 18, VehicleManagerObj.AllVehicles);
             Vehicle vehicle13 = new Bike(5, "Specialized", "Strive", "Black", "2015", 27, VehicleManagerObj.AllVehicles);

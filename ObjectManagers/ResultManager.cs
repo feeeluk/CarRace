@@ -24,35 +24,46 @@ namespace Race.ObjectsManagers
         ////////////////////////////////////////////////////////
         // Methods
         ////////////////////////////////////////////////////////
-        public void RaceResults(List<Team> teams, Circuit circuitChoice, List<RaceResult> seasonResults, List<Vehicle> vehicles )
+        public void RaceResults(List<Team> teams, Circuit circuit, List<RaceResult> seasonResults, List<Vehicle> vehicles )
         {
             List<Vehicle> vehiclesInRace = new List<Vehicle>();
             List<RaceResult> raceResult = new List<RaceResult>();
             RaceResult originalVehicleRaceResultRecord;
             RaceResult newVehicleRaceResultRecord;
 
-            CreateRaceResultsList();
+            CalculateRaceResults();
             UpdateRaceResultsList();
             ShowRaceResultsList();
 
-            void CreateRaceResultsList()
+            void CalculateRaceResults()
             {
                 foreach (Vehicle vehicle in vehicles)
                 {
                         vehiclesInRace.Add(vehicle);
                 }
 
+
                 for (int i = 0; i < vehiclesInRace.Count(); i++)
                 {
                     int resultID = i;
                     DateTime resultDate = DateTime.Now;
-                    int resultCircuitID = circuitChoice.ID;
+                    int resultCircuitID = circuit.ID;
                     int resultTeamID = vehiclesInRace.ElementAt(i).VehicleTeamID;
                     int resultVehicleID = vehiclesInRace.ElementAt(i).VehicleID;
                     VehicleType resultVehicleType = vehiclesInRace.ElementAt(i).VehicleType;
                     String resultVehicleMake = vehiclesInRace.ElementAt(i).VehicleMake;
                     String resultVehicleModel = vehiclesInRace.ElementAt(i).VehicleModel;
-                    double resultTime = Math.Round((circuitChoice.NumberOfLaps * circuitChoice.LapLengthKm) / vehiclesInRace.ElementAt(i).VehicleSpeed, 2);
+                    double result = 0;
+
+                    for (int ii = 0; ii < circuit.NumberOfLaps; ii++)
+                    {
+                        Random random = new Random();
+                        double randomLapModifier = random.NextDouble();
+                        double modifiedSpeed = vehiclesInRace.ElementAt(i).VehicleSpeed * randomLapModifier;
+                        result = circuit.LapLengthKm / modifiedSpeed;
+                        result += result;
+                    }
+                    double resultTime = Math.Round(result, 2);
                     int resultPosition = 0;
                     int resultPoints = 0;
                     bool resultWinner = false;
@@ -220,7 +231,11 @@ namespace Race.ObjectsManagers
                             break;
                     }
 
-                    Console.WriteLine($"   {stringWinner}{stringPodium} - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts, (result ID{raceResult.ElementAt(i).ResultID}) {raceResult.ElementAt(i).Time}hrs/mins - Team {raceResult.ElementAt(i).TeamID} Vehicle #{raceResult.ElementAt(i).VehicleID}, ({raceResult.ElementAt(i).VehicleType}), {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel}");
+                    Console.WriteLine($"   {stringWinner}{stringPodium}" +
+                        $" - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts, " +
+                        $"Time:{raceResult.ElementAt(i).Time}hrs/mins, " +
+                        $"Team: {raceResult.ElementAt(i).TeamID}, " +
+                        $"Vehicle #{raceResult.ElementAt(i).VehicleID} ({raceResult.ElementAt(i).VehicleType}, {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel})");
                 }
 
                 Console.WriteLine();
@@ -239,7 +254,13 @@ namespace Race.ObjectsManagers
             {
                 foreach (var result in group)
                 {
-                    Console.WriteLine($"  Day: {result.ResultDate.ToString("yyyy/MM/dd")}, Circuit:{result.CircuitID}, Team:{result.TeamID}, Vehicle:{result.VehicleID}, Position:{result.Position}, Points:{result.Points}, Winner:{result.Winner}");
+                    Console.WriteLine($"  Day: {result.ResultDate.ToString("yyyy/MM/dd")}, " +
+                        $"Circuit:{result.CircuitID}, " +
+                        $"Team:{result.TeamID}, " +
+                        $"Vehicle:{result.VehicleID}, " +
+                        $"Position:{result.Position}, " +
+                        $"Points:{result.Points}, " +
+                        $"Winner:{result.Winner}");
                 }
             }
 
