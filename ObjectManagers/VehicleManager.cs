@@ -1,6 +1,7 @@
 ﻿using Race.Objects.Vehicles;
 using Race.Objects;
 using Race.Objects.Teams;
+using System.Collections.Generic;
 
 namespace Race.ObjectsManagers
 {
@@ -10,9 +11,9 @@ namespace Race.ObjectsManagers
         // Properties
         // ****************************************************************
         public List<Vehicle> AllVehicles { get; set; }
-        Team ChosenTeam { get; set; }
-        int teamChoiceInt { get; set; }
-        String IsChoiceCorrect { get; set; }
+        Team SelectedTeam { get; set; }
+        int SelectedTeamInt { get; set; }
+        String ConfirmedTeam { get; set; }
         
 
 
@@ -73,12 +74,14 @@ namespace Race.ObjectsManagers
 
             while (x == 0)
             {
-                ChosenTeam = UserChoosesTeam();
-                IsChoiceCorrect = UserConfirmsChosenTeam();
+                ShowAllTeams();
+                SelectedTeamInt = SelectATeam();
+                ShowSelectedTeam(SelectedTeamInt);
+                ConfirmedTeam = ConfirmSelectedTeam();
 
                 Console.WriteLine("");
 
-                switch (IsChoiceCorrect)
+                switch (ConfirmedTeam)
                 {
                     case "y":
                     case "Y":
@@ -105,26 +108,36 @@ namespace Race.ObjectsManagers
                 }
 
 
-                Team UserChoosesTeam()
+                void ShowAllTeams()
                 {
-                    Console.WriteLine($"  Which Team do you want to choose?");
-                    teamChoiceInt = Convert.ToInt32(Console.ReadLine()) - 1;
-
-                    return DisplayChosenTeam(teamChoiceInt);
+                    Console.WriteLine($"  Which Team?");
+                    
+                    int i = 1;
+                    foreach (Team team in teams)
+                    {
+                        Console.WriteLine($"  - {team.Name} ({i})");
+                        i++;
+                    }
                 }
 
 
-                Team DisplayChosenTeam(int userChoice)
+                int SelectATeam()
                 {
-                    Console.WriteLine();
-                    Team choice = teams.ElementAt(userChoice);
-                    Console.WriteLine($"  You have selected: #{choice.ID} - {choice.Name}");
-                    Console.WriteLine();
-                    return choice;
+                    return Convert.ToInt32(Console.ReadLine()) - 1;
                 }
 
 
-                String UserConfirmsChosenTeam()
+                Team ShowSelectedTeam(int selectedTeam)
+                {
+                    Console.WriteLine();
+                    SelectedTeam = teams.ElementAt(selectedTeam);
+                    Console.WriteLine($"  You have selected: #{SelectedTeam.ID} - {SelectedTeam.Name}");
+                    Console.WriteLine();
+                    return SelectedTeam;
+                }
+
+
+                String ConfirmSelectedTeam()
                 {
                     Console.WriteLine($"  Is this correct? y(yes) n(no) x(exit)");
                     return Console.ReadLine();
@@ -166,41 +179,31 @@ namespace Race.ObjectsManagers
                 }
 
 
-                bool IsItMotorised()
+                VehicleType WhatVehicleType()
                 {
-                    Console.Write($"  Is it motorised? y / n:");
 
-                    String isItMotorised = Console.ReadLine();
+                    Console.WriteLine($"  Which VehicleType?");
 
-                    switch (isItMotorised)
-                    {
-                        case "y":
-                        case "Y":
-                            break;
-
-                        case "n":
-                        case "N":
-                            return false;
-                    }
-
-                    return true;
-                }
-
-
-                int WhichTypeOfVehicle(bool isMotorised)
-                {
-                    List<VehicleType> list = AllVehicles.Where(x => x.IsMotorisedVehicle == isMotorised).Select(x => x.VehicleType).Distinct().ToList();
                     int i = 1;
-                    Console.WriteLine("  What type of vehicle is it? ");
-                    foreach (VehicleType v in list)
+                    List<VehicleType> types = new List<VehicleType>();
+                    foreach (VehicleType vt in Enum.GetValues(typeof(VehicleType)))
                     {
-                        Console.WriteLine($"    {v} ({i})");
+                        Console.WriteLine($"  - {vt} ({i})");
+                        types.Add( vt );
                         i++;
                     }
 
-                    return Convert.ToInt32(Console.ReadLine());
+                    int selected = Convert.ToInt32(Console.ReadLine()) - 1;
+                    return types.ElementAt(selected);                 
                 }
-                
+
+
+                bool IsItMotorised(VehicleType vt)
+                {
+                    List<bool> list = allVehicles.Where(x => x.VehicleType == vt).Select(x => x.IsMotorisedVehicle).Distinct().ToList();
+                    return list.ElementAt(0);
+                }
+               
                 
                 Engine WhichEngine()
                 {
@@ -234,46 +237,43 @@ namespace Race.ObjectsManagers
 
                 void Add()
                 {
-                    int newVehicleTeamID = teamChoiceInt + 1;
+                    Team newVehicleTeam = SelectedTeam;
                     String newVehicleMake = WhatMake();
                     String newVehicleModel = WhatModel();
                     String newVehicleColour = WhatColour();
                     String newVehicleYear = WhatYear();
                     int newVehicleSpeed = WhatSpeed();
-                    bool newVehicleIsMotorised = IsItMotorised();
+                    VehicleType newVehicleType = WhatVehicleType();
+                    bool newVehicleIsItMotorised = IsItMotorised(newVehicleType);
 
-                    if (newVehicleIsMotorised == true)
+                    if( newVehicleIsItMotorised == true )
                     {
-                        int newVehicleType = WhichTypeOfVehicle(newVehicleIsMotorised);
-
                         Engine newVehicleEngine = WhichEngine();
                         FuelTank newVehicleFuelTank = WhichFuelTank();
 
-                        if (newVehicleType == 1)
+                        if (newVehicleType == VehicleType.Car)
                         {
-                            Vehicle vehicle1 = new Car(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
+                            Vehicle vehicle1 = new Car(newVehicleTeam, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW CAR ADDED TO TEAM");
 
                             Thread.Sleep(500);
                         }
 
-                        else if (newVehicleType == 2)
+                        else if (newVehicleType == VehicleType.Truck)
                         {
-                            Vehicle vehicle1 = new Truck(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
+                            Vehicle vehicle1 = new Truck(newVehicleTeam, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles, motorisedVehicles, newVehicleEngine, newVehicleFuelTank);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW TRUCK ADDED TO TEAM");
                             Thread.Sleep(500);
                         }
                     }
 
-                    else
+                    else if(newVehicleIsItMotorised == false)
                     {
-                        int newVehicleType = WhichTypeOfVehicle(newVehicleIsMotorised);
-
-                        if (newVehicleType == 1)
+                        if (newVehicleType == VehicleType.Bike)
                         {
-                            Vehicle vehicle1 = new Bike(newVehicleTeamID, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
+                            Vehicle vehicle1 = new Bike(newVehicleTeam, newVehicleMake, newVehicleModel, newVehicleColour, newVehicleYear, newVehicleSpeed, allVehicles);
                             Console.WriteLine();
                             Console.WriteLine($"  NEW Bike ADDED TO TEAM");
                             Thread.Sleep(500);

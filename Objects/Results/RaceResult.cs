@@ -1,4 +1,6 @@
-﻿namespace Race.Objects.Results
+﻿using Race.Objects.Teams;
+
+namespace Race.Objects.Results
 {
     public class RaceResult
     {
@@ -11,7 +13,7 @@
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }
         public int CircuitID { get; set; }
-        public int TeamID { get; set; }
+        public Team Team { get; set; }
         public double Time { get; set; }
         public int Position { get; set; }
         public int Points { get; set; }
@@ -23,7 +25,7 @@
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public RaceResult(int id, DateTime resultDate, int vehicle, VehicleType type, string make, string model, int circuit, int teamID, double time, int position, int points, bool winner, bool podium)
+        public RaceResult(int id, DateTime resultDate, int vehicle, VehicleType type, string make, string model, int circuit, Team team, double time, int position, int points, bool winner, bool podium)
         {
             ResultID = id;
             ResultDate = resultDate;
@@ -35,7 +37,7 @@
             Time = time;
             Position = position;
             Points = points;
-            TeamID = teamID;
+            Team = team;
             Winner = winner;
             Podium = podium;
         }

@@ -1,8 +1,8 @@
 ﻿using Race.Objects.Vehicles;
-using Race.Objects.Circuits;
-using Race.Objects.Results;
-using Race.Objects.Teams;
 using Race.Objects;
+using Race.Objects.Teams;
+using Race.Objects.Results;
+using Race.Objects.Circuits;
 
 namespace Race.ObjectsManagers
 {
@@ -48,7 +48,7 @@ namespace Race.ObjectsManagers
                     int resultID = i;
                     DateTime resultDate = DateTime.Now;
                     int resultCircuitID = circuit.ID;
-                    int resultTeamID = vehiclesInRace.ElementAt(i).VehicleTeamID;
+                    Team resultTeam = vehiclesInRace.ElementAt(i).VehicleTeam;
                     int resultVehicleID = vehiclesInRace.ElementAt(i).VehicleID;
                     VehicleType resultVehicleType = vehiclesInRace.ElementAt(i).VehicleType;
                     String resultVehicleMake = vehiclesInRace.ElementAt(i).VehicleMake;
@@ -76,7 +76,7 @@ namespace Race.ObjectsManagers
                                                     resultVehicleMake,
                                                     resultVehicleModel,
                                                     resultCircuitID,
-                                                    resultTeamID,
+                                                    resultTeam,
                                                     resultTime,
                                                     resultPosition,
                                                     resultPoints,
@@ -169,7 +169,7 @@ namespace Race.ObjectsManagers
                     int resultID = raceResult.ElementAt(i).ResultID;
                     DateTime resultDate = raceResult.ElementAt(i).ResultDate;
                     int resultCircuitID = raceResult.ElementAt(i).CircuitID;
-                    int resultTeamID = raceResult.ElementAt(i).TeamID;
+                    Team resultTeam = raceResult.ElementAt(i).Team;
                     int resultVehicleID = raceResult.ElementAt(i).VehicleID;
                     VehicleType resultVehicleType = raceResult.ElementAt(i).VehicleType;
                     String resultVehicleMake = raceResult.ElementAt(i).VehicleMake;
@@ -187,7 +187,7 @@ namespace Race.ObjectsManagers
                                                     resultVehicleMake,
                                                     resultVehicleModel,
                                                     resultCircuitID,
-                                                    resultTeamID,
+                                                    resultTeam,
                                                     resultTime,
                                                     resultPosition,
                                                     resultPoints,
@@ -234,7 +234,7 @@ namespace Race.ObjectsManagers
                     Console.WriteLine($"   {stringWinner}{stringPodium}" +
                         $" - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts, " +
                         $"Time:{raceResult.ElementAt(i).Time}hrs/mins, " +
-                        $"Team: {raceResult.ElementAt(i).TeamID}, " +
+                        $"Team: {raceResult.ElementAt(i).Team}, " +
                         $"Vehicle #{raceResult.ElementAt(i).VehicleID} ({raceResult.ElementAt(i).VehicleType}, {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel})");
                 }
 
@@ -256,7 +256,7 @@ namespace Race.ObjectsManagers
                 {
                     Console.WriteLine($"  Day: {result.ResultDate.ToString("yyyy/MM/dd")}, " +
                         $"Circuit:{result.CircuitID}, " +
-                        $"Team:{result.TeamID}, " +
+                        $"Team:{result.Team}, " +
                         $"Vehicle:{result.VehicleID}, " +
                         $"Position:{result.Position}, " +
                         $"Points:{result.Points}, " +
@@ -297,17 +297,17 @@ namespace Race.ObjectsManagers
             Console.WriteLine($"  =======================");
 
             var query = (from s in SeasonResults
-                         group s by new { s.TeamID}
+                         group s by new { s.Team}
                         into grp
                          select new
                          {
-                             grp.Key.TeamID,
+                             grp.Key.Team,
                              TotalPoints = grp.Sum(s => s.Points)
                          }).ToList();
 
             foreach (var raceResult in query)
             {
-                Console.WriteLine($"  Team:{raceResult.TeamID},  Total points:{raceResult.TotalPoints}");
+                Console.WriteLine($"  Team:{raceResult.Team},  Total points:{raceResult.TotalPoints}");
             }
 
             Console.WriteLine();

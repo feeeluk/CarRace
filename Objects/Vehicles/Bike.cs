@@ -1,4 +1,6 @@
-﻿namespace Race.Objects.Vehicles
+﻿using Race.Objects.Teams;
+
+namespace Race.Objects.Vehicles
 {
     public class Bike : Vehicle
     {
@@ -13,8 +15,8 @@
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Bike(int teamID, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
-            : base(allVehicles, teamID, make, model, colour, year, speed)
+        public Bike(Team team, string make, string model, string colour, string year, int speed, List<Vehicle> allVehicles)
+            : base(allVehicles, team, make, model, colour, year, speed)
         {
         }
 

@@ -1,4 +1,4 @@
-﻿using Race.Objects;
+﻿using Race.Objects.Teams;
 
 namespace Race.Objects.Vehicles
 {
@@ -16,7 +16,7 @@ namespace Race.Objects.Vehicles
         public abstract VehicleType VehicleType { get; }
         public abstract int VehicleNumberOfWheels { get; }
         public int VehicleID { get; set; }
-        public int VehicleTeamID { get; set; }
+        public Team VehicleTeam { get; set; }
         public String VehicleMake { get; set; }
         public String VehicleModel { get; set; }
         public String VehicleColour { get; set; }
@@ -31,10 +31,10 @@ namespace Race.Objects.Vehicles
         // ****************************************************************
         // Constructor
         // ****************************************************************
-        public Vehicle(List<Vehicle> allVehicles, int teamID, String make, String model, String colour, String year, int speed)
+        public Vehicle(List<Vehicle> allVehicles, Team team, String make, String model, String colour, String year, int speed)
         {
             VehicleID = allVehicles.Count()+1;
-            VehicleTeamID = teamID;
+            VehicleTeam = team;
             VehicleMake = make;
             VehicleModel = model;
             VehicleColour = colour;

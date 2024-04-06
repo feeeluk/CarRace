@@ -1,4 +1,6 @@
-﻿namespace Race.Objects.Vehicles;
+﻿using Race.Objects.Teams;
+
+namespace Race.Objects.Vehicles;
 
 public abstract class MotorisedVehicle : Vehicle
 {
@@ -13,8 +15,8 @@ public abstract class MotorisedVehicle : Vehicle
     // *******************************************************
     // CONSTRUCTOR
     // *******************************************************
-    public MotorisedVehicle(List<Vehicle> vehicles, int teamID, String make, String model, String colour, String year, int speed, List<MotorisedVehicle> motorisedVehicles, Engine engine, FuelTank fuelTank)
-        : base(vehicles, teamID, make, model, colour, year, speed)
+    public MotorisedVehicle(List<Vehicle> vehicles, Team team, String make, String model, String colour, String year, int speed, List<MotorisedVehicle> motorisedVehicles, Engine engine, FuelTank fuelTank)
+        : base(vehicles, team, make, model, colour, year, speed)
     {
         MotorisedVehicleEngine = engine;
         MotorisedVehicleFuelTank = fuelTank;

@@ -10,7 +10,7 @@
     public enum FuelType
     {
         Petrol,
-        Diesl,
+        Diesel,
         Electric
     }
 }

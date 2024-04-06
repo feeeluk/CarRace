@@ -56,7 +56,7 @@ namespace Race.ObjectsManagers
 
                 foreach (Vehicle vehicle in allVehicles)
                 {
-                    if (team.ID == vehicle.VehicleTeamID)
+                    if (team == vehicle.VehicleTeam)
                     {
                         Console.WriteLine($"    * Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
                     }

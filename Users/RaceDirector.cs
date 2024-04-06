@@ -1,8 +1,8 @@
 ﻿using Race.ObjectsManagers;
 using Race.Objects.Vehicles;
-using Race.Objects.Circuits;
-using Race.Objects.Results;
 using Race.Objects.Teams;
+using Race.Objects.Results;
+using Race.Objects.Circuits;
 
 namespace Race.Users
 {
