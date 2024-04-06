@@ -39,26 +39,21 @@ namespace Race.ObjectsManagers
         {
             Console.WriteLine($"  All Vehicles:");
             Console.WriteLine($"  ==============");
-            int i = 1;
+
             foreach (Vehicle v in AllVehicles)
             {
+                Console.Write($"    - Vehicle #{v.VehicleID} - {v.VehicleType}," +
+                        $"{v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, " +
+                        $"{v.VehicleSpeedCategory}");
+
                 if (v.IsMotorisedVehicle == true)
                 {
-                    MotorisedVehicle mv = motorisedVehicles.Find(x => x.VehicleID == i);
-                    Console.WriteLine($"    - Vehicle #{mv.VehicleID} - {mv.VehicleType}," +
-                        $"{mv.VehicleMake}, {mv.VehicleModel}, {mv.VehicleColour}, {mv.VehicleYear}, " +
-                        $"{mv.VehicleSpeedCategory}, " +
-                        $"Engine(ID:{mv.MotorisedVehicleEngine.EngineID}, {mv.MotorisedVehicleEngine.EngineName}, {mv.MotorisedVehicleEngine.EngineFuelType}), " +
+                    MotorisedVehicle mv = motorisedVehicles.Find(x => x.VehicleID == v.VehicleID);
+                    Console.Write($", Engine(ID:{mv.MotorisedVehicleEngine.EngineID}, {mv.MotorisedVehicleEngine.EngineName}, {mv.MotorisedVehicleEngine.EngineFuelType}), " +
                         $"Fuel Tank(ID:{mv.MotorisedVehicleFuelTank.FuelTankID}, {mv.MotorisedVehicleFuelTank.FuelTankName}, {mv.MotorisedVehicleFuelTank.FuelTankSize} ltrs)");
                 }
 
-                else
-                {
-                    Console.WriteLine($"    - Vehicle #{v.VehicleID} - {v.VehicleType}, " +
-                        $"{v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, " +
-                        $"{v.VehicleSpeedCategory}");
-                }
-                i++;
+                Console.WriteLine();
             }
 
             Console.WriteLine();

@@ -45,7 +45,7 @@ namespace Race.ObjectsManagers
         }
 
 
-        public void ShowVehiclesInEachTeam(List<Vehicle> allVehicles)
+        public void ShowVehiclesInEachTeam(List<Vehicle> allVehicles, List<MotorisedVehicle> motorisedVehicles)
         {
             Console.WriteLine($"   Vehicles per team:");
             Console.WriteLine($"   =================");
@@ -54,11 +54,23 @@ namespace Race.ObjectsManagers
             {
                 Console.WriteLine($"   - {team.Name}");
 
-                foreach (Vehicle vehicle in allVehicles)
+                foreach (Vehicle v in allVehicles)
                 {
-                    if (team == vehicle.VehicleTeam)
+                    if (team == v.VehicleTeam)
                     {
-                        Console.WriteLine($"    * Vehicle #{vehicle.VehicleID} - {vehicle.VehicleType}, {vehicle.VehicleMake}, {vehicle.VehicleModel}, {vehicle.VehicleColour}, {vehicle.VehicleYear}, {vehicle.VehicleSpeedCategory.ToUpper()}");
+                        Console.Write($"    - Vehicle #{v.VehicleID} - {v.VehicleType}," +
+                                $"{v.VehicleMake}, {v.VehicleModel}, {v.VehicleColour}, {v.VehicleYear}, " +
+                                $"{v.VehicleSpeedCategory}");
+
+                        if (v.IsMotorisedVehicle == true)
+                        {
+                            MotorisedVehicle mv = motorisedVehicles.Find(x => x.VehicleID == v.VehicleID);
+                            Console.Write($", Engine(ID:{mv.MotorisedVehicleEngine.EngineID}, {mv.MotorisedVehicleEngine.EngineName}, {mv.MotorisedVehicleEngine.EngineFuelType}), " +
+                                $"Fuel Tank(ID:{mv.MotorisedVehicleFuelTank.FuelTankID}, {mv.MotorisedVehicleFuelTank.FuelTankName}, {mv.MotorisedVehicleFuelTank.FuelTankSize} ltrs)");
+                        }
+
+                        Console.WriteLine();
+
                     }
                 }
 

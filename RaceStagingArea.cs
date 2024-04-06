@@ -165,7 +165,7 @@ namespace Race
                         break;
 
                     case 4:
-                        TeamManagerObj.ShowVehiclesInEachTeam(VehicleManagerObj.AllVehicles);
+                        TeamManagerObj.ShowVehiclesInEachTeam(VehicleManagerObj.AllVehicles, MotorisedVehicleManagerObj.MotorisedVehicles);
                         break;
 
                     case 5:

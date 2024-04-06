@@ -234,7 +234,7 @@ namespace Race.ObjectsManagers
                     Console.WriteLine($"   {stringWinner}{stringPodium}" +
                         $" - #{raceResult.ElementAt(i).Position} {raceResult.ElementAt(i).Points}pts, " +
                         $"Time:{raceResult.ElementAt(i).Time}hrs/mins, " +
-                        $"Team: {raceResult.ElementAt(i).Team}, " +
+                        $"Team: {raceResult.ElementAt(i).Team.Name}, " +
                         $"Vehicle #{raceResult.ElementAt(i).VehicleID} ({raceResult.ElementAt(i).VehicleType}, {raceResult.ElementAt(i).VehicleMake} {raceResult.ElementAt(i).VehicleModel})");
                 }
 
@@ -274,17 +274,21 @@ namespace Race.ObjectsManagers
             Console.WriteLine($"  ===================");
 
             var query = (from s in SeasonResults
-                         group s by new { s.VehicleID }
+                         group s by new { s.VehicleID, s.VehicleType, s.VehicleMake, s.VehicleModel, s.Team.Name }
                         into grp
                          select new
                          {
                              grp.Key.VehicleID,
+                             grp.Key.VehicleType,
+                             grp.Key.VehicleMake,
+                             grp.Key.VehicleModel,
+                             grp.Key.Name,
                              TotalPoints = grp.Sum(s => s.Points)
                          }).ToList();
 
-            foreach (var raceResult in query)
+            foreach (var result in query)
             {
-                Console.WriteLine($"  Vehicle:{raceResult.VehicleID},  Total points:{raceResult.TotalPoints}"); 
+                Console.WriteLine($"  - Points: {result.TotalPoints} = Vehicle #{result.VehicleID}, {result.VehicleType}, {result.VehicleMake}, {result.VehicleModel}, {result.Name}"); 
             }
 
             Console.WriteLine();
@@ -307,7 +311,7 @@ namespace Race.ObjectsManagers
 
             foreach (var raceResult in query)
             {
-                Console.WriteLine($"  Team:{raceResult.Team},  Total points:{raceResult.TotalPoints}");
+                Console.WriteLine($"  - Points: {raceResult.TotalPoints} = {raceResult.Team.Name}");
             }
 
             Console.WriteLine();
